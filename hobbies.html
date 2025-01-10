@@ -9,9 +9,11 @@
 <body>
     <header>
         <h1><a href="home.html">Vidyut Baradwaj</a> / Passtimes</h1>
+        <button id="theme-toggle">🌙</button>
     </header>
 
     <main>
+      <p> <i>*non exaustive</i>
         <ul>
             <li>Making and drinking coffee</li>
             <li>Curating my <a href="https://open.spotify.com/user/techbuster1909?si=2192211ed0ae45b3"> Spotify playlists </a> </li>
@@ -26,5 +28,23 @@
     <footer>
         <p>&copy; 2024 Vidyut Baradwaj. All rights reserved.</p>
     </footer>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+            themeToggle.textContent = savedTheme === 'dark-theme' ? '☀️' : '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            const isDark = body.classList.contains('dark-theme');
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark-theme' : '');
+        });
+    </script>
 </body>
 </html>

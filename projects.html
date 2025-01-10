@@ -12,6 +12,7 @@
 <body> 
     <header id="banner">
         <h1><a href="home.html">Vidyut Baradwaj</a> / Projects</h1>
+        <button id="theme-toggle">🌙</button>
     </header>
     <main id="content">
         <p>Here are some things I've worked on and am currently working on.</p>
@@ -79,6 +80,24 @@
             <a href="https://www.linkedin.com/in/vidyut-baradwaj ">LinkedIn</a>
         </p>
     </footer>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+            themeToggle.textContent = savedTheme === 'dark-theme' ? '☀️' : '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            const isDark = body.classList.contains('dark-theme');
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark-theme' : '');
+        });
+    </script>
 </body>
 
 </html>

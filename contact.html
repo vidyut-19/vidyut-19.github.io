@@ -8,16 +8,38 @@
         <title>Vidyut Baradwaj</title>
     </head>
 <body>
-    <h1><a href="home.html">Vidyut Baradwaj</a> / Socials</h1>
-    
+    <header>
+        <div class="header-container">
+            <h1><a href="home.html">Vidyut Baradwaj</a> / Socials</h1>
+            <button id="theme-toggle">🌙</button>
+        </div>
+    </header>
     
     <ul class="social-media-list">
         <li><a href="https://twitter.com/vidyutbaradwaj"><i class="fab fa-twitter"></i><i class="fab fa-twitter-square"></i></a></li>
-        <li><a href="https://www.instagram.com/vidyut.pdf/"><i class="fab fa-instagram"></i><i class="fab fa-instagram-squar e"></i></a></li>
-        <li><a href="https://www.linkedin.com/in/vidyut-baradwaj "><i class="fab fa-linkedin"></i><i class="fab fa-linkedin"></i></a></li>
+        <li><a href="https://www.instagram.com/vidyut.pdf/"><i class="fab fa-instagram"></i><i class="fab fa-instagram-square"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/vidyut-baradwaj"><i class="fab fa-linkedin"></i><i class="fab fa-linkedin"></i></a></li>
         <li><a href="https://github.com/vidyut-19"><i class="fab fa-github"></i><i class="fab fa-github-square"></i></a></li>
     </ul>
-    </ul>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+            themeToggle.textContent = savedTheme === 'dark-theme' ? '☀️' : '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            const isDark = body.classList.contains('dark-theme');
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark-theme' : '');
+        });
+    </script>
 </body>
 </html>
 
