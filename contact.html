@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
@@ -12,7 +12,7 @@
     <header>
         <div class="header-container">
             <h1><a href="index.html">Vidyut Baradwaj</a> / Socials</h1>
-            <button id="theme-toggle">🌙</button>
+            <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
         </div>
     </header>
     
@@ -43,23 +43,34 @@
         </li>
     </ul>
 
+    <footer>
+        <p>© 2025 Vidyut Baradwaj. All rights reserved.</p>
+    </footer>
+
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
+        const renderIcon = () => {
+            const isDark = document.body.classList.contains('dark-theme');
+            themeToggle.innerHTML = isDark
+                ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+        };
         
         // Check for saved theme preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.classList.add(savedTheme);
-            themeToggle.textContent = savedTheme === 'dark-theme' ? '☀️' : '🌙';
+            renderIcon();
         }
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-theme');
             const isDark = body.classList.contains('dark-theme');
-            themeToggle.textContent = isDark ? '☀️' : '🌙';
             localStorage.setItem('theme', isDark ? 'dark-theme' : '');
+            renderIcon();
         });
+        if (!savedTheme) renderIcon();
     </script>
 </body>
 </html>

@@ -8,43 +8,55 @@
 </head>
 <body>
     <header>
-        <h1><a href="home.html">Vidyut Baradwaj</a> / Passtimes</h1>
-        <button id="theme-toggle">🌙</button>
+        <div class="header-container">
+            <div class="header-left">
+                <h1><a href="index.html">Vidyut Baradwaj</a> / Pastimes</h1>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
+        </div>
     </header>
 
     <main>
-      <p> <i>*non exaustive</i>
-        <ul>
-            <li>Making and drinking coffee with my aeropress</li>
-            <li>Curating my <a href="https://open.spotify.com/user/techbuster1909?si=2192211ed0ae45b3"> Spotify playlists </a> </li>
-        <li> Learning new Bhangra choreo </li>
-            <li>Twisting my ankles playing tennis</li>
-            <li>Reading about the TV shows I watch</li>
-            <li>Watching video essays on YouTube</li>
-        </ul>
-    </main>
+      <p><i>*non exhaustive</i></p>
+      <ul>
+        <li>Making and drinking coffee with my AeroPress</li>
+        <li>Biking on the West Side Highway</li>
+        <li>Curating my <a href="https://open.spotify.com/user/techbuster1909?si=2192211ed0ae45b3">Spotify playlists</a></li>
+        <li>Learning new Bhangra choreo</li>
+        <li>Mixing house tunes on my DJ controller</li>
+        <li>Twisting my ankles playing tennis</li>
+        <li>Reading about the TV shows I watch</li>
+        <li>Watching video essays on YouTube</li>
+      </ul>
     </main>
 
     <footer>
-        <p>&copy; 2024 Vidyut Baradwaj. All rights reserved.</p>
+        <p>&copy; 2025 Vidyut Baradwaj. All rights reserved.</p>
     </footer>
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
+        const renderIcon = () => {
+            const isDark = document.body.classList.contains('dark-theme');
+            themeToggle.innerHTML = isDark
+                ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+        };
         
         // Check for saved theme preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.classList.add(savedTheme);
-            themeToggle.textContent = savedTheme === 'dark-theme' ? '☀️' : '🌙';
+            renderIcon();
         }
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-theme');
             const isDark = body.classList.contains('dark-theme');
-            themeToggle.textContent = isDark ? '☀️' : '🌙';
             localStorage.setItem('theme', isDark ? 'dark-theme' : '');
+            renderIcon();
         });
+        if (!savedTheme) renderIcon();
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <title>Vidyut Baradwaj</title>
@@ -11,31 +11,35 @@
 
 <body> 
     <header id="banner">
-        <h1><a href="home.html">Vidyut Baradwaj</a> / Projects</h1>
-        <button id="theme-toggle">🌙</button>
+        <div class="header-container">
+            <div class="header-left">
+                <h1><a href="index.html">Vidyut Baradwaj</a> / Projects</h1>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
+        </div>
     </header>
     <main id="content">
         <p>Here are some things I've worked on and am currently working on.</p>
 
-        <div class="experience"></div>
+        <div class="experience">
             <h3><b>CTA Delay Predictor</b></h3>
             <p>- A web app that predicts the delay of a CTA train based on the time of day, day of the week, and the station.</p>
             <p>- Uses Kafka and Spark to process data from the CTA's API</p>
-            <p>- Used Hive and Hbase to store and process historical ridership and weather data</p>
+            <p>- Used Hive and HBase to store and process historical ridership and weather data</p>
         </div>
         <div class="experience">
-            <h3><b>Tech Titans: Ebay Clone</b></h3>
-            <p>- A clone of Ebay built with a microservices architecture</p>
+            <h3><b>Tech Titans: eBay Clone</b></h3>
+            <p>- A clone of eBay built with a microservices architecture</p>
             <p>- Uses RabbitMQ, PostgreSQL, MongoDB to manage inventory and user data</p>
             <p>- Uses Docker for deployment</p>
         </div>
-        <dic class="experience">
+        <div class="experience">
             <h3><b>vb-FaaS: A Serverless Function as a Service</b></h3>
             <p>- Uses Redis, multithreading, RabbitMQ, and FastAPI to handle concurrent requests</p>
-        </dic>
+        </div>
         <div class="experience">
             <h3><b>FastConv Image Processor</b></h3>
-            <p>- Concurrent Go program with convolution engine and ray tracer using pipelining and dynamic work stealing offering upto 6X speedups.</p>
+            <p>- Concurrent Go program with convolution engine and ray tracer using pipelining and dynamic work stealing offering up to 6X speedups.</p>
             <p>- Includes sharpening, blurring, grayscale, and edge detection. Sequential implementation included.</p>
         </div>
         <div class="experience">
@@ -47,7 +51,7 @@
             <h3><b>Phil: An Advisor for UChicago Undergraduates</b></h3>
             <p>- Developed search engine for course catalog queries with front-end chatbot interface built on Flask.</p>
             <p>- Includes sentiment analyzer built using Selenium and NLTK for smart course selection assistance for undergraduates.</p>
-            <p>(*Note) I helped make this before GPT-3 was out. I indend on upgrading it with Llama 3</p>
+            <p>(*Note) I helped make this before GPT-3 was out. I intend on upgrading it with Llama 3</p>
         </div>
         <div class="experience">
             <h3><b>GAS: AWS-based Full-stack SaaS for Genomics Annotation</b></h3>
@@ -58,14 +62,14 @@
         <div class="experience">
             <h3><b>Tale of Two Cities</b></h3>
             <p>- I wrote a 25-page mini-thesis on differing Indian immigrant experiences in Doha and San Francisco.</p>
-            <p>- Paired it a sociological framework as to how educational level affected their socio-economic outcomes, among other factors.
+            <p>- Paired it with a sociological framework as to how educational level affected their socio-economic outcomes, among other factors.
             <p>- Using some Python, I scraped some geo-tagged tweets and did some sentiment analysis as part of the methodology</p>
             </p>
         </div>
         <div class="experience">
             <h3><b>Where's My Uber</b></h3>
-            <p>- A shorter paper, this one examined the formation of social microstructures by Uber drivers in response to the information assymetry of the rideshare market.</p>
-            <p>- Paired it a sociological framework as to how educational level affected their socio-economic outcomes, among other factors.
+            <p>- A shorter paper, this one examined the formation of social microstructures by Uber drivers in response to the information asymmetry of the rideshare market.</p>
+            <p>- Paired it with a sociological framework as to how educational level affected their socio-economic outcomes, among other factors.
             <p>- Using some Python, I scraped some geo-tagged tweets and did some sentiment analysis as part of the methodology</p>
             </p>
         </div>
@@ -74,7 +78,6 @@
             <p>- Currently working on an app that combines the UX's of our generation's most beloved two apps (citation needed)</p>
             <p>- Rank-based movie aggregator built on Swift (I used to remember Flutter) </p>
         </div>
-    </main>
         <div class="experience">
             <h3><b>Other Projects (includes some filmmaking)</b></h3>
             <p>- GMM, BMM Models with numpy</p>
@@ -91,27 +94,35 @@
             <a href="projects.html">Projects</a> 
             <a href="contact.html">Socials</a> 
             <a href="hobbies.html">Hobbies</a> 
-            <a href="https://github.com/vidyut-19">Github</a> 
-            <a href="https://www.linkedin.com/in/vidyut-baradwaj ">LinkedIn</a>
+            <a href="https://github.com/vidyut-19">GitHub</a> 
+            <a href="https://www.linkedin.com/in/vidyut-baradwaj">LinkedIn</a>
         </p>
+        <p>© 2025 Vidyut Baradwaj. All rights reserved.</p>
     </footer>
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
+        const renderIcon = () => {
+            const isDark = document.body.classList.contains('dark-theme');
+            themeToggle.innerHTML = isDark
+                ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+        };
         
         // Check for saved theme preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.classList.add(savedTheme);
-            themeToggle.textContent = savedTheme === 'dark-theme' ? '☀️' : '🌙';
+            renderIcon();
         }
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-theme');
             const isDark = body.classList.contains('dark-theme');
-            themeToggle.textContent = isDark ? '☀️' : '🌙';
             localStorage.setItem('theme', isDark ? 'dark-theme' : '');
+            renderIcon();
         });
+        if (!savedTheme) renderIcon();
     </script>
 </body>
 

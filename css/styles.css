@@ -1,7 +1,7 @@
 /* This is the main stylesheet for the site. */
 /* Desktop */
 header {
-  padding-right: 20%;
+  padding-right: 0;
   }
   
   main {
@@ -30,7 +30,14 @@ header {
 .header-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .profile-pic {
@@ -54,11 +61,12 @@ header {
 #theme-toggle {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1em;
   cursor: pointer;
   padding: 5px;
   border-radius: 50%;
   transition: background-color 0.3s;
+  color: inherit;
 }
 
 #theme-toggle:hover {
@@ -67,6 +75,15 @@ header {
 
 body.dark-theme #theme-toggle:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+body.dark-theme #theme-toggle {
+  color: #e0e0e0;
+}
+
+/* Size Lucide SVG icons inside the theme toggle */
+#theme-toggle svg {
+  width: 1.2em;
+  height: 1.2em;
 }
 
 /* Update dark theme styles */
@@ -90,12 +107,6 @@ body.dark-theme a:active {
   padding-bottom: 2%;
   font-size: 100%;
   align-items: center;
-  }
-  
-  a:link {
-  color: #193652;
-  background-color: transparent;
-  text-decoration: none;
   }
   
   a:link,
@@ -150,11 +161,4 @@ body.dark-theme .social-media-list li a {
   height: 30px;
   margin-right: 5px;
 }
-  
-    body {
-      width: 60%;
-      margin-top: 5%;
-      margin-left: 20%;
-      margin-right: 20%;
-    }
   

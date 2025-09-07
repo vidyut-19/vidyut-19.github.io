@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <title>Vidyut Baradwaj</title>
@@ -10,24 +10,23 @@
 <body>
     <header id="banner">
         <div class="header-container">
-            <img src="assets/images/profile.jpg" alt="Profile Picture" class="profile-pic">
-            <div class="name-and-toggle">
-                <h2><a href="https://vidyut.github.io/">Vidyut Baradwaj</a></h2>
-                <button id="theme-toggle">🌙</button>
+            <div class="header-left">
+                <img src="assets/images/profile.jpg" alt="Profile Picture" class="profile-pic">
+                <h2><a href="index.html">Vidyut Baradwaj</a></h2>
             </div>
+            <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
         </div>
     </header>
         <p>I studied computational and applied math at UChicago. My coursework included a mix of analysis, theoretical statistics, numerical methods, 
-            machine learning, and optimization. More recently I completed a masters' in computer science as part of a Bs/Ms program. I learnt to write concurrent code in Go, make games in Haskell, and 
+            machine learning, and optimization. More recently I completed a master's in computer science as part of a BS/MS program. I learnt to write concurrent code in Go, make games in Haskell, and 
             build web apps with AWS, including big data ones with Spark, Hive, and Kafka. </p>
             
-        <p> I currently work at a sports-tech startup called Javelin as a founding engineer. I worked at another <a href="https:/trajektory.com/"></a>one</a> before this, among a couple other stints at bigger companies. 
+        <p> I currently work at a sports-tech startup called Javelin as a founding engineer. I worked at another startup, <a href="https://trajektory.com/">Trajektory</a>, before this, among a couple other stints at bigger companies. 
             Beyond that, I did some research, and graded a few classes. 
-            When I found time, I did competitve <a href="https://www.youtube.com/watch?v=FhJwJ90ksXc">Bhangra</a>, started a Bollywood-Rock band named AC/Desi, and watched a lot of HBO with my friends. </p>  
+            When I found time, I did competitive <a href="https://www.youtube.com/watch?v=FhJwJ90ksXc">Bhangra</a>, started a Bollywood-Rock band named AC/Desi, and watched a lot of HBO with my friends. </p>  
         
 
 
-    </section>
     <nav>
         <ul>
             <li><a href="projects.html">Projects</a></li>
@@ -41,8 +40,9 @@
     <h3> Current Media</h3>
     <ul> 
         <li>Since I've been feeling a little melancholic about leaving Chicago:</li>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1hgZVjoVHUuXESkoYZitly?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
+        <li>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1hgZVjoVHUuXESkoYZitly?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </li>
         <li>The Unbearable Lightness of Being by Milan Kundera</li>
         <li>Mad Men Season 5</li>
     </ul>
@@ -53,21 +53,29 @@
 
     <script>
         const themeToggle = document.getElementById('theme-toggle');
+        const renderIcon = () => {
+            const isDark = document.body.classList.contains('dark-theme');
+            themeToggle.innerHTML = isDark
+                ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+        };
         const body = document.body;
         
         // Check for saved theme preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.classList.add(savedTheme);
-            themeToggle.textContent = savedTheme === 'dark-theme' ? '☀️' : '🌙';
+            renderIcon();
         }
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-theme');
             const isDark = body.classList.contains('dark-theme');
-            themeToggle.textContent = isDark ? '☀️' : '🌙';
             localStorage.setItem('theme', isDark ? 'dark-theme' : '');
+            renderIcon();
         });
+        // Initial icon if no saved theme
+        if (!savedTheme) renderIcon();
     </script>
 </body>
 </html>
