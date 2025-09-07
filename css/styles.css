@@ -25,6 +25,7 @@ header {
     margin-left: 20%;
     margin-right: 20%;
     width: 60%;
+    padding-bottom: 3rem;
   }
   
 .header-container {
@@ -160,5 +161,42 @@ body.dark-theme .social-media-list li a {
   width: 30px;
   height: 30px;
   margin-right: 5px;
+}
+  
+/* Global subtle vb banner at viewport bottom */
+body::after {
+  content: "vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb vbvbvbvb";
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28px;
+  line-height: 28px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  opacity: 0.8; /* 80% opacity as requested */
+  color: #444851;
+  padding-left: 10px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Model viewer section styling */
+.model-section {
+  margin-top: 20px;
+}
+
+model-viewer {
+  width: 100%;
+  height: 320px;
+  background: transparent;
+}
+
+@media (max-width: 600px) {
+  model-viewer {
+    height: 240px;
+  }
 }
   
