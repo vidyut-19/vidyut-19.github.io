@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <title>Vidyut Baradwaj</title>
 </head>
@@ -12,7 +14,7 @@
         <div class="header-container">
             <div class="header-left">
                 <img src="assets/images/profile.jpg" alt="Profile Picture" class="profile-pic">
-                <h2><a href="index.html">Vidyut Baradwaj</a></h2>
+                <h2><a href="index.html">Vidyut Baradwaj</a> <span class="slash-title">/ Home</span></h2>
             </div>
             <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
         </div>
@@ -52,6 +54,13 @@
     </footer>
 
     <script>
+        // Move the vb banner vertically with scroll (cross-browser fallback)
+        const updateBannerOffset = () => {
+            const y = window.scrollY || window.pageYOffset;
+            document.body.style.setProperty('--vb-banner-offset', (y % 120) + 'px');
+        };
+        window.addEventListener('scroll', updateBannerOffset, { passive: true });
+        updateBannerOffset();
         const themeToggle = document.getElementById('theme-toggle');
         const renderIcon = () => {
             const isDark = document.body.classList.contains('dark-theme');

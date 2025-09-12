@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Hobbies</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css">
 </head>
 <body>
     <header>
         <div class="header-container">
             <div class="header-left">
-                <h1><a href="index.html">Vidyut Baradwaj</a> / Pastimes</h1>
+                <h1><a href="index.html">Vidyut Baradwaj</a> <span class="slash-title">/ Pastimes</span></h1>
             </div>
             <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
         </div>
@@ -36,6 +38,12 @@
         <p>&copy; 2025 Vidyut Baradwaj. All rights reserved.</p>
     </footer>
     <script>
+        const updateBannerOffset = () => {
+            const y = window.scrollY || window.pageYOffset;
+            document.body.style.setProperty('--vb-banner-offset', (y % 120) + 'px');
+        };
+        window.addEventListener('scroll', updateBannerOffset, { passive: true });
+        updateBannerOffset();
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
         const renderIcon = () => {
