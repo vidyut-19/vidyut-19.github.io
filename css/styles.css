@@ -144,12 +144,17 @@ header {
   gap: 15px;
 }
 
+.header-left h1,
+.header-left h2 {
+  margin: 0;
+}
+
 .profile-pic {
   width: 100px;
   height: 100px;
   border-radius: 100%;
-  margin-right: 15px;
-  margin-bottom: 15px;
+  margin-right: 0;
+  margin-bottom: 0;
 }
 
 .name-and-toggle {
@@ -284,6 +289,7 @@ body::after {
   padding-left: 10px;
   pointer-events: none;
   z-index: 100;
+  transform: translateX(var(--vb-banner-x-offset, 0px));
   backdrop-filter: blur(8px) saturate(140%) contrast(105%);
   background-color: rgba(255, 255, 255, 0.22);
   border-top: 1px solid rgba(0, 0, 0, 0.06);

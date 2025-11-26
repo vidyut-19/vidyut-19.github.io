@@ -19,21 +19,19 @@
             <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
         </div>
     </header>
-        <p>I studied computational and applied math at UChicago. My coursework included a mix of analysis, theoretical statistics, numerical methods, 
-            machine learning, and optimization. More recently I completed a master's in computer science as part of a BS/MS program. I learnt to write concurrent code in Go, make games in Haskell, and 
-            build web apps with AWS, including big data ones with Spark, Hive, and Kafka. </p>
-            
-        <p> I currently work at a sports-tech startup called Javelin as a founding engineer. I worked at another startup, <a href="https://trajektory.com/">Trajektory</a>, before this, among a couple other stints at bigger companies. 
-            Beyond that, I did some research, and graded a few classes. 
-            When I found time, I did competitive <a href="https://www.youtube.com/watch?v=FhJwJ90ksXc">Bhangra</a>, started a Bollywood-Rock band named AC/Desi, and watched a lot of HBO with my friends. </p>  
-        
 
+<p>I am currently helping build the intelligence layer of athlete marketing at <a href="javelin.html">Javelin</a>.</p>
+
+<p>I studied computational and applied math at UChicago. My coursework was a blend of analysis, theoretical statistics, numerical methods, machine learning, and optimization. More recently I completed a master's in computer science as part of a BS/MS program. I learnt to write concurrent code in Go, make games in Haskell, and build web apps with AWS, including big data ones with Spark, Hive, and Kafka.</p>
+
+<p>I worked at another startup, <a href="https://trajektory.com/">Trajektory</a>, before this. Beyond that, I did some research, and graded a few classes, and worked at a few bigger companies. When I found time, I did competitive <a href="https://www.youtube.com/watch?v=FhJwJ90ksXc">Bhangra</a>, started a Bollywood-Rock band named AC/Desi, and watched a lot of HBO with my friends.</p>
+        
+<p></p>
 
     <nav>
         <ul>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="hobbies.html">Hobbies</a></li>
-            <!-- <li><a href="articles.html">Favorite Articles</a></li> -->
             <li><a href="contact.html">My @'s</a></li>
             <li><a href="https://vidyuts.substack.com/">hard kaapi (my blog)</a></li>
         </ul>
@@ -45,16 +43,15 @@
         <li>
             <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1hgZVjoVHUuXESkoYZitly?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </li>
-        <li>The Unbearable Lightness of Being by Milan Kundera</li>
+        <li>The Lord of the Rings Trilogy</li>
         <li>Mad Men Season 5</li>
     </ul>
 
     <footer>
-        <p>© 2025 Vidyut Baradwaj. All rights reserved. (s/o to my friend <a href="https://advaitiyer.com/">Advait</a> for the design)</p>
+        <p>© 2025 Vidyut Baradwaj.</p>
     </footer>
 
     <script>
-        // Move the vb banner vertically with scroll (cross-browser fallback)
         const updateBannerOffset = () => {
             const y = window.scrollY || window.pageYOffset;
             document.body.style.setProperty('--vb-banner-offset', (y % 120) + 'px');
@@ -70,7 +67,7 @@
         };
         const body = document.body;
         
-        // Check for saved theme preference
+
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.classList.add(savedTheme);
@@ -83,7 +80,6 @@
             localStorage.setItem('theme', isDark ? 'dark-theme' : '');
             renderIcon();
         });
-        // Initial icon if no saved theme
         if (!savedTheme) renderIcon();
     </script>
 </body>

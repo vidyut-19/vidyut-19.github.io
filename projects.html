@@ -104,7 +104,9 @@
     <script>
         const updateBannerOffset = () => {
             const y = window.scrollY || window.pageYOffset;
+            const x = Math.sin(y / 120) * 80;
             document.body.style.setProperty('--vb-banner-offset', (y % 120) + 'px');
+            document.body.style.setProperty('--vb-banner-x-offset', x + 'px');
         };
         window.addEventListener('scroll', updateBannerOffset, { passive: true });
         updateBannerOffset();
