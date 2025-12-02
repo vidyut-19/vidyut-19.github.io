@@ -1,13 +1,20 @@
 /* This is the main stylesheet for the site. */
+
+/* Typography Variables */
+:root {
+  --font-heading: 'Cormorant Garamond', 'CMU Serif', Georgia, serif;
+  --font-body: 'CMU Serif', 'Computer Modern Serif', 'Latin Modern Roman', Georgia, 'Times New Roman', serif;
+}
+
 /* Desktop */
 header {
   padding-right: 0;
   }
-  
+
   main {
   line-height: 1.7;
   }
-  
+
   @font-face {
     font-family: 'ZT Bros Oskon 90s';
     src: url('../fonts/ZTBrosOskon90s.woff2') format('woff2'),
@@ -55,17 +62,32 @@ header {
   }
 
   h2 {
+    font-family: var(--font-heading);
     font-size: clamp(1.75rem, 3.5vw, 2rem);
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     margin-top: 2.5rem;
     margin-bottom: 0.75rem;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
     font-weight: 600;
+    letter-spacing: 0.015em;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  h4 {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-top: 1.25rem;
+    margin-bottom: 0.4rem;
   }
 
   /* Prose tweaks: inline and block code */
@@ -147,6 +169,7 @@ header {
 .header-left h1,
 .header-left h2 {
   margin: 0;
+  font-family: var(--font-body);
 }
 
 .profile-pic {

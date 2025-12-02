@@ -1,0 +1,351 @@
+/* Tufte-style blog layout */
+/* Three-column: left margin (images), center (prose), right margin (annotations) */
+
+/* Override body max-width for essay pages */
+body.tufte-post {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Three-column grid layout */
+.tufte-article {
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, 50ch) 1fr;
+  column-gap: 2rem;
+  padding: 2rem 1.5rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  counter-reset: sidenote-counter;
+}
+
+/* Article header spans full width, centered */
+.tufte-article > header.article-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.article-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.article-header .subtitle {
+  font-style: italic;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.article-header time {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+body.dark-theme .article-header .subtitle,
+body.dark-theme .article-header time {
+  color: #9ca3af;
+}
+
+/* Content sections - children participate in parent grid */
+.tufte-article section {
+  grid-column: 2 / 3;
+  display: contents;
+}
+
+/* Default content flows in center column */
+.tufte-article p,
+.tufte-article h2,
+.tufte-article h3,
+.tufte-article h4,
+.tufte-article ul,
+.tufte-article ol,
+.tufte-article blockquote,
+.tufte-article pre {
+  grid-column: 2 / 3;
+}
+
+/* =====================================================
+   SIDENOTES AND MARGIN NOTES
+   ===================================================== */
+
+/* Hide checkbox inputs */
+.sidenote-toggle-input,
+.margin-toggle-input {
+  display: none;
+}
+
+/* Sidenote number styling (superscript) */
+.sidenote-number {
+  counter-increment: sidenote-counter;
+}
+
+.sidenote-number::after {
+  content: counter(sidenote-counter);
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  color: #0366D6;
+  cursor: pointer;
+}
+
+body.dark-theme .sidenote-number::after {
+  color: #66b3ff;
+}
+
+/* Sidenote content - right margin */
+.sidenote {
+  grid-column: 3 / 4;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #555;
+  position: relative;
+  margin-top: 0;
+  padding-left: 0.5rem;
+}
+
+.sidenote::before {
+  content: counter(sidenote-counter) ". ";
+  font-size: 0.75rem;
+  color: #0366D6;
+}
+
+body.dark-theme .sidenote {
+  color: #a0a0a0;
+}
+
+body.dark-theme .sidenote::before {
+  color: #66b3ff;
+}
+
+/* Margin note (no number) */
+.marginnote {
+  grid-column: 3 / 4;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #555;
+  font-style: italic;
+  padding-left: 0.5rem;
+}
+
+body.dark-theme .marginnote {
+  color: #a0a0a0;
+}
+
+/* Toggle symbol for margin notes/figures */
+.margin-toggle {
+  cursor: pointer;
+  color: #0366D6;
+  font-size: 0.8em;
+}
+
+body.dark-theme .margin-toggle {
+  color: #66b3ff;
+}
+
+/* =====================================================
+   LEFT MARGIN FIGURES
+   ===================================================== */
+
+.margin-figure-left {
+  grid-column: 1 / 2;
+  justify-self: end;
+  max-width: 220px;
+  margin: 0;
+}
+
+.margin-figure-left img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.margin-figure-left figcaption {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #555;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+body.dark-theme .margin-figure-left figcaption {
+  color: #a0a0a0;
+}
+
+/* Right margin figures */
+.margin-figure-right {
+  grid-column: 3 / 4;
+  max-width: 220px;
+  margin: 0;
+}
+
+.margin-figure-right img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.margin-figure-right figcaption {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #555;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+body.dark-theme .margin-figure-right figcaption {
+  color: #a0a0a0;
+}
+
+/* =====================================================
+   FULL-WIDTH ELEMENTS
+   ===================================================== */
+
+.fullwidth {
+  grid-column: 1 / -1;
+  max-width: 100%;
+  margin: 2rem 0;
+}
+
+.fullwidth img {
+  width: 100%;
+  height: auto;
+}
+
+.fullwidth figcaption {
+  max-width: 50ch;
+  margin: 0.75rem auto 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+body.dark-theme .fullwidth figcaption {
+  color: #a0a0a0;
+}
+
+/* =====================================================
+   HEADER/FOOTER CONTAINMENT
+   ===================================================== */
+
+body.tufte-post #banner,
+body.tufte-post header:not(.article-header) {
+  max-width: 72ch;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+body.tufte-post #footer,
+body.tufte-post footer:not(.article-header) {
+  max-width: 72ch;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+/* Tablet: Narrower margins */
+@media (max-width: 1200px) {
+  .tufte-article {
+    grid-template-columns: 160px minmax(auto, 50ch) 160px;
+    column-gap: 1.5rem;
+  }
+
+  .margin-figure-left,
+  .margin-figure-right {
+    max-width: 160px;
+  }
+}
+
+/* Small tablet / large phone: Single column with toggles */
+@media (max-width: 900px) {
+  .tufte-article {
+    display: block;
+    max-width: 50ch;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* Hide margin content by default on mobile */
+  .sidenote,
+  .marginnote {
+    display: none;
+    float: none;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 3px solid #0366D6;
+    font-style: normal;
+  }
+
+  body.dark-theme .sidenote,
+  body.dark-theme .marginnote {
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: #66b3ff;
+  }
+
+  /* Show when toggled */
+  .sidenote-toggle-input:checked + .sidenote,
+  .margin-toggle-input:checked + .marginnote {
+    display: block;
+  }
+
+  /* Margin figures become inline on mobile */
+  .margin-figure-left,
+  .margin-figure-right {
+    display: none;
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+
+  .margin-figure-left figcaption,
+  .margin-figure-right figcaption {
+    text-align: left;
+  }
+
+  .margin-toggle-input:checked ~ img,
+  .margin-toggle-input:checked ~ figcaption {
+    display: block;
+  }
+
+  /* Show toggle symbols on mobile */
+  .margin-toggle {
+    display: inline;
+  }
+
+  /* Fullwidth adjusts to container */
+  .fullwidth {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    width: calc(100% + 3rem);
+  }
+}
+
+/* Phone: Tighter spacing */
+@media (max-width: 600px) {
+  .tufte-article {
+    padding: 1.5rem 1rem;
+  }
+
+  .article-header h1 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+}
+
+/* Hide toggle symbols on desktop (shown by default) */
+@media (min-width: 901px) {
+  .margin-toggle {
+    display: none;
+  }
+
+  .sidenote,
+  .marginnote,
+  .margin-figure-left,
+  .margin-figure-right {
+    display: block;
+  }
+}
