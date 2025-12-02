@@ -68,6 +68,50 @@ def parse_frontmatter(content: str) -> tuple[dict, str]:
     return frontmatter or {}, body
 
 
+def process_inline_code(text: str) -> str:
+    """Convert markdown backticks to HTML code tags."""
+    return re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
+
+
+def process_acronyms(html: str) -> str:
+    """Wrap common acronyms in smallcaps spans.
+
+    Matches 2-5 letter all-caps words, excluding:
+    - Already inside HTML tags
+    - Inside code blocks
+    - Common words that shouldn't be smallcaps (I, A, etc.)
+    """
+    # Words to exclude (single letters, common words)
+    exclude = {'I', 'A', 'OK', 'US', 'UK', 'AM', 'PM', 'AD', 'BC', 'ID', 'OR', 'AN', 'IF', 'IT', 'AS', 'AT', 'BE', 'BY', 'DO', 'GO', 'HE', 'IN', 'IS', 'ME', 'MY', 'NO', 'OF', 'ON', 'SO', 'TO', 'UP', 'WE'}
+
+    def replace_acronym(match):
+        word = match.group(1)
+        if word in exclude:
+            return word
+        return f'<span class="smallcaps">{word}</span>'
+
+    # Split by HTML tags to avoid processing inside tags
+    parts = re.split(r'(<[^>]+>)', html)
+    result = []
+    in_code = False
+
+    for part in parts:
+        # Track if we're inside a code block
+        if part.startswith('<code'):
+            in_code = True
+        elif part.startswith('</code'):
+            in_code = False
+
+        # Only process text outside of tags and code blocks
+        if not part.startswith('<') and not in_code:
+            # Match 2-5 letter all-caps words with word boundaries
+            part = re.sub(r'\b([A-Z]{2,5})\b', replace_acronym, part)
+
+        result.append(part)
+
+    return ''.join(result)
+
+
 def process_sidenotes(html: str) -> str:
     """Convert {.sidenote}...{/.sidenote} syntax to HTML sidenotes."""
     sidenote_counter = [0]  # Use list for closure mutability
@@ -178,8 +222,11 @@ def build_essay(md_path: Path, is_draft: bool = False) -> dict:
     title = re.sub(r'\s*\[DRAFT\].*$', '', title, flags=re.IGNORECASE)
     title = re.sub(r'\s*\[EARLY DRAFT\].*$', '', title, flags=re.IGNORECASE)
 
-    # Format date
+
     date_iso, date_formatted = format_date(date_str) if date_str else ('', '')
+
+    # Process inline code before markdown conversion
+    body = process_inline_code(body)
 
     # Convert markdown to HTML
     html_content = convert_markdown(body)
@@ -187,10 +234,12 @@ def build_essay(md_path: Path, is_draft: bool = False) -> dict:
     # Process sidenotes
     html_content = process_sidenotes(html_content)
 
+    # Auto-wrap acronyms in smallcaps
+    html_content = process_acronyms(html_content)
+
     # Load template
     template = TEMPLATE_PATH.read_text(encoding='utf-8')
 
-    # Apply template
     output = template
     output = output.replace('{{title}}', title)
     output = output.replace('{{date}}', date_iso)

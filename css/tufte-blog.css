@@ -8,6 +8,62 @@ body.tufte-post {
   padding-right: 0;
 }
 
+/* =====================================================
+   DROPCAPS
+   ===================================================== */
+
+.tufte-article section > p:first-of-type::first-letter {
+  font-size: 3.5em;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.1em;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: #111;
+}
+
+body.dark-theme .tufte-article section > p:first-of-type::first-letter {
+  color: #e0e0e0;
+}
+
+/* =====================================================
+   LINK STYLING
+   ===================================================== */
+
+.tufte-article a {
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.tufte-article a:hover {
+  text-decoration-color: currentColor;
+}
+
+body.dark-theme .tufte-article a {
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-theme .tufte-article a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Inline code styling for essays */
+.tufte-article code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.15em 0.3em;
+  border-radius: 3px;
+}
+
+body.dark-theme .tufte-article code {
+  background: rgba(255, 255, 255, 0.08);
+}
+
 /* Three-column grid layout */
 .tufte-article {
   display: grid;
@@ -101,6 +157,11 @@ body.dark-theme .sidenote-number::after {
   position: relative;
   margin-top: 0;
   padding-left: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.sidenote:hover {
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .sidenote::before {
@@ -125,6 +186,11 @@ body.dark-theme .sidenote::before {
   color: #555;
   font-style: italic;
   padding-left: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.marginnote:hover {
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 body.dark-theme .marginnote {
@@ -157,6 +223,12 @@ body.dark-theme .margin-toggle {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 2px;
+  transition: transform 0.2s ease;
+}
+
+.margin-figure-left img:hover {
+  transform: scale(1.02);
 }
 
 .margin-figure-left figcaption {
@@ -182,6 +254,12 @@ body.dark-theme .margin-figure-left figcaption {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 2px;
+  transition: transform 0.2s ease;
+}
+
+.margin-figure-right img:hover {
+  transform: scale(1.02);
 }
 
 .margin-figure-right figcaption {
