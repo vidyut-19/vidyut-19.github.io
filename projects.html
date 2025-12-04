@@ -23,75 +23,123 @@
             <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
         </div>
     </header>
+
+    <!-- Lens Scroller Navigation -->
+    <div class="lens-scroller-wrapper" id="lens-scroller-wrapper">
+        <div class="lens-scroller" id="lens-scroller">
+            <div class="lens-scroller-track" id="lens-track">
+                <!-- Set 1 -->
+                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
+                <!-- Set 2 -->
+                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
+                <!-- Set 3 -->
+                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
+            </div>
+        </div>
+    </div>
+    <div class="lens-scroller-placeholder" id="lens-placeholder"></div>
+
     <main id="content">
         <p>Here are some things I've worked on and am currently working on.</p>
 
         <div class="experience">
             <h3><b>CTA Delay Predictor</b></h3>
-            <p>- A web app that predicts the delay of a CTA train based on the time of day, day of the week, and the station.</p>
-            <p>- Uses Kafka and Spark to process data from the CTA's API</p>
-            <p>- Used Hive and HBase to store and process historical ridership and weather data</p>
+            <ul>
+                <li>A web app that predicts the delay of a CTA train based on the time of day, day of the week, and the station.</li>
+                <li>Uses Kafka and Spark to process data from the CTA's API</li>
+                <li>Used Hive and HBase to store and process historical ridership and weather data</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>Tech Titans: eBay Clone</b></h3>
-            <p>- A clone of eBay built with a microservices architecture</p>
-            <p>- Uses RabbitMQ, PostgreSQL, MongoDB to manage inventory and user data</p>
-            <p>- Uses Docker for deployment</p>
+            <ul>
+                <li>A clone of eBay built with a microservices architecture</li>
+                <li>Uses RabbitMQ, PostgreSQL, MongoDB to manage inventory and user data</li>
+                <li>Uses Docker for deployment</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>vb-FaaS: A Serverless Function as a Service</b></h3>
-            <p>- Uses Redis, multithreading, RabbitMQ, and FastAPI to handle concurrent requests</p>
+            <ul>
+                <li>Uses Redis, multithreading, RabbitMQ, and FastAPI to handle concurrent requests</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>FastConv Image Processor</b></h3>
-            <p>- Concurrent Go program with convolution engine and ray tracer using pipelining and dynamic work stealing offering up to 6X speedups.</p>
-            <p>- Includes sharpening, blurring, grayscale, and edge detection. Sequential implementation included.</p>
+            <ul>
+                <li>Concurrent Go program with convolution engine and ray tracer using pipelining and dynamic work stealing offering up to 6X speedups.</li>
+                <li>Includes sharpening, blurring, grayscale, and edge detection. Sequential implementation included.</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>SinkyViT: Sparse Sinkhorn Attention Vision Transformer</b></h3>
-            <p>- ViT with Sparse Sinkhorn Attention for improved efficiency in image classification (15% reduced FLOPs estimated).</p>
-            <p>- Tested on MNIST and CIFAR-10 dataset</p>
+            <ul>
+                <li>ViT with Sparse Sinkhorn Attention for improved efficiency in image classification (15% reduced FLOPs estimated).</li>
+                <li>Tested on MNIST and CIFAR-10 dataset</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>Phil: An Advisor for UChicago Undergraduates</b></h3>
-            <p>- Developed search engine for course catalog queries with front-end chatbot interface built on Flask.</p>
-            <p>- Includes sentiment analyzer built using Selenium and NLTK for smart course selection assistance for undergraduates.</p>
-            <p>(*Note) I helped make this before GPT-3 was out. I intend on upgrading it with Llama 3</p>
+            <ul>
+                <li>Developed search engine for course catalog queries with front-end chatbot interface built on Flask.</li>
+                <li>Includes sentiment analyzer built using Selenium and NLTK for smart course selection assistance for undergraduates.</li>
+            </ul>
+            <p><em>Note: I helped make this before GPT-3 was out. I intend on upgrading it with Llama 3.</em></p>
         </div>
         <div class="experience">
             <h3><b>GAS: AWS-based Full-stack SaaS for Genomics Annotation</b></h3>
-            <p>- Multi-tiered architecture with Flask front-end, integrated AWS services for scalability and performance.</p>
-            <p>- Used Amazon EC2, S3, DynamoDB and SQS functions for automatic scaling and archival processes with free/premium user bifurcation.</p>
-            <p>- Integrated with Globus OAuth service</p>
+            <ul>
+                <li>Multi-tiered architecture with Flask front-end, integrated AWS services for scalability and performance.</li>
+                <li>Used Amazon EC2, S3, DynamoDB and SQS functions for automatic scaling and archival processes with free/premium user bifurcation.</li>
+                <li>Integrated with Globus OAuth service</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>Tale of Two Cities</b></h3>
-            <p>- I wrote a 25-page mini-thesis on differing Indian immigrant experiences in Doha and San Francisco.</p>
-            <p>- Paired it with a sociological framework as to how educational level affected their socio-economic outcomes, among other factors.
-            <p>- Using some Python, I scraped some geo-tagged tweets and did some sentiment analysis as part of the methodology</p>
-            </p>
+            <ul>
+                <li>I wrote a 25-page mini-thesis on differing Indian immigrant experiences in Doha and San Francisco.</li>
+                <li>Paired it with a sociological framework as to how educational level affected their socio-economic outcomes, among other factors.</li>
+                <li>Using some Python, I scraped some geo-tagged tweets and did some sentiment analysis as part of the methodology.</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>Where's My Uber</b></h3>
-            <p>- A shorter paper, this one examined the formation of social microstructures by Uber drivers in response to the information asymmetry of the rideshare market.</p>
-            <p>- Paired it with a sociological framework as to how educational level affected their socio-economic outcomes, among other factors.
-            <p>- Using some Python, I scraped some geo-tagged tweets and did some sentiment analysis as part of the methodology</p>
-            </p>
+            <ul>
+                <li>A shorter paper, this one examined the formation of social microstructures by Uber drivers in response to the information asymmetry of the rideshare market.</li>
+                <li>Paired it with a sociological framework as to how educational level affected their socio-economic outcomes, among other factors.</li>
+                <li>Using some Python, I scraped some geo-tagged tweets and did some sentiment analysis as part of the methodology.</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>Lumiere - Beli meets Letterboxd*</b></h3>
-            <p>- Currently working on an app that combines the UX's of our generation's most beloved two apps (citation needed)</p>
-            <p>- Rank-based movie aggregator built on Swift (I used to remember Flutter) </p>
+            <ul>
+                <li>Currently working on an app that combines the UX's of our generation's most beloved two apps (citation needed)</li>
+                <li>Rank-based movie aggregator built on Swift (I used to remember Flutter)</li>
+            </ul>
         </div>
         <div class="experience">
             <h3><b>Other Projects (includes some filmmaking)</b></h3>
-            <p>- GMM, BMM Models with numpy</p>
-            <p>- GANs and VAEs in PyTorch, tested on CIFAR-10 and MNIST (naturally) </p>
-            <p>- SQL Query Engine for Course Catalog</p>
-            <p>- Movie about the invention of a Circle</p>
-            <p>- Some Breaking Bad Cinematography Recreation</p> 
-            <p>- Scheduler for IB Students built on Flutter</p>
-            <p>- SASA 2024 Trailer </p>
+            <ul>
+                <li>GMM, BMM Models with numpy</li>
+                <li>GANs and VAEs in PyTorch, tested on CIFAR-10 and MNIST (naturally)</li>
+                <li>SQL Query Engine for Course Catalog</li>
+                <li>Movie about the invention of a Circle</li>
+                <li>Some Breaking Bad Cinematography Recreation</li>
+                <li>Scheduler for IB Students built on Flutter</li>
+                <li>SASA 2024 Trailer</li>
+            </ul>
         </div>
     </main>
     <footer id="footer">
@@ -117,11 +165,12 @@
         const body = document.body;
         const renderIcon = () => {
             const isDark = document.body.classList.contains('dark-theme');
+
             themeToggle.innerHTML = isDark
-                ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>'
-                : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+                ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="19" rx="5" ry="2"/><path d="M7 19v-3c0-1 1-2 2-3l1-2h4l1 2c1 1 2 2 2 3v3"/><path d="M10 11V7c0-1 1-2 2-2s2 1 2 2v4"/><path d="M12 5c0-1.5-1-3-1-3s2 0 2 2"/></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="10" width="6" height="11" rx="1"/><path d="M10 10V9a2 2 0 1 1 4 0v1"/><ellipse cx="12" cy="6" rx="2" ry="3"/><path d="M12 3c0-1 .5-2 .5-2s.5 1 .5 2"/></svg>';
         };
-        
+
         // Check for saved theme preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
@@ -136,6 +185,189 @@
             renderIcon();
         });
         if (!savedTheme) renderIcon();
+
+        // ============================================
+        // Lens Scroller
+        // ============================================
+        (function() {
+            const wrapper = document.getElementById('lens-scroller-wrapper');
+            const scroller = document.getElementById('lens-scroller');
+            const track = document.getElementById('lens-track');
+            const placeholder = document.getElementById('lens-placeholder');
+            const items = track.querySelectorAll('.lens-item');
+            const itemCount = 5;
+
+            const currentPath = window.location.pathname;
+            const pageMap = {
+                'projects': 'projects.html',
+                'essays': 'essays.html',
+                'hobbies': 'hobbies.html',
+                'contact': 'contact.html',
+                'javelin': 'javelin.html'
+            };
+
+            let currentPageIndex = 0;
+            items.forEach((item, index) => {
+                const page = item.dataset.page;
+                if (currentPath.includes(pageMap[page])) {
+                    item.classList.add('current');
+                    if (index < itemCount) currentPageIndex = index;
+                }
+            });
+
+            let currentX = 0;
+            let targetX = 0;
+            let isDragging = false;
+            let startX = 0;
+            let startScrollX = 0;
+            let itemWidth = 0;
+            let setWidth = 0;
+            let scrollerCenter = 0;
+            let initialized = false;
+
+            let gap = 0;
+
+            function calculateDimensions() {
+                const firstItem = items[0];
+                const style = getComputedStyle(track);
+                gap = parseFloat(style.gap) || 40;
+                itemWidth = firstItem.offsetWidth + gap;
+                setWidth = itemWidth * itemCount;
+                scrollerCenter = scroller.offsetWidth / 2;
+            }
+
+            function updateDepthEffect() {
+                const centerX = scrollerCenter;
+                items.forEach(item => {
+                    const itemRect = item.getBoundingClientRect();
+                    const scrollerRect = scroller.getBoundingClientRect();
+                    const itemCenter = itemRect.left + itemRect.width / 2 - scrollerRect.left;
+                    const distance = Math.abs(itemCenter - centerX);
+                    const maxDistance = scrollerCenter;
+                    const normalizedDistance = Math.min(distance / maxDistance, 1);
+                    const opacity = 1 - (normalizedDistance * 0.7);
+                    const blur = normalizedDistance * 1.5;
+                    item.style.opacity = Math.max(0.3, opacity);
+                    item.style.filter = blur > 0.1 ? `blur(${blur}px)` : 'none';
+                });
+            }
+
+            function wrapPosition() {
+                if (currentX < -setWidth * 1.5) {
+                    currentX += setWidth;
+                    targetX += setWidth;
+                } else if (currentX > -setWidth * 0.5) {
+                    currentX -= setWidth;
+                    targetX -= setWidth;
+                }
+            }
+
+            function snapToNearest() {
+                const itemActualWidth = itemWidth - gap;
+                const centerOffset = scrollerCenter - itemActualWidth / 2;
+                const relativeX = currentX + centerOffset;
+                const nearestIndex = Math.round(-relativeX / itemWidth);
+                targetX = -nearestIndex * itemWidth - centerOffset;
+            }
+
+            function animate() {
+                if (!initialized) {
+                    calculateDimensions();
+                    if (itemWidth > 0) {
+                        // Center the item: account for gap (first item has no left gap)
+                        const itemActualWidth = itemWidth - gap;
+                        const centerOffset = scrollerCenter - itemActualWidth / 2;
+                        currentX = -setWidth - currentPageIndex * itemWidth - centerOffset;
+                        targetX = currentX;
+                        initialized = true;
+                    }
+                }
+
+                if (!isDragging && initialized) {
+                    currentX += (targetX - currentX) * 0.15;
+                    if (Math.abs(targetX - currentX) < 0.5) currentX = targetX;
+                }
+
+                if (initialized) {
+                    wrapPosition();
+                    track.style.transform = `translateX(${currentX}px)`;
+                    updateDepthEffect();
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            function onDragStart(e) {
+                if (!initialized) return;
+                isDragging = true;
+                track.classList.add('grabbing');
+                startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+                startScrollX = currentX;
+                e.preventDefault();
+            }
+
+            function onDragMove(e) {
+                if (!isDragging) return;
+                const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+                const delta = x - startX;
+                currentX = startScrollX + delta;
+                targetX = currentX;
+            }
+
+            function onDragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                track.classList.remove('grabbing');
+                snapToNearest();
+            }
+
+            let wrapperTop = 0;
+            let isFixed = false;
+
+            function updateFixedState() {
+                wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
+            }
+
+            function onScroll() {
+                const scrollY = window.scrollY;
+                const shouldFix = scrollY > wrapperTop;
+                if (shouldFix && !isFixed) {
+                    isFixed = true;
+                    wrapper.classList.add('is-fixed');
+                    placeholder.classList.add('active');
+                    wrapper.style.backgroundColor = getComputedStyle(document.body).backgroundColor;
+                } else if (!shouldFix && isFixed) {
+                    isFixed = false;
+                    wrapper.classList.remove('is-fixed');
+                    placeholder.classList.remove('active');
+                }
+            }
+
+            function onWheel(e) {
+                if (!initialized) return;
+                e.preventDefault();
+                // Use deltaX for horizontal scroll, fallback to deltaY for vertical scroll wheels
+                const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+                targetX -= delta * 0.5;
+                snapToNearest();
+            }
+
+            track.addEventListener('mousedown', onDragStart);
+            track.addEventListener('touchstart', onDragStart, { passive: false });
+            window.addEventListener('mousemove', onDragMove);
+            window.addEventListener('touchmove', onDragMove, { passive: true });
+            window.addEventListener('mouseup', onDragEnd);
+            window.addEventListener('touchend', onDragEnd);
+            scroller.addEventListener('wheel', onWheel, { passive: false });
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', () => {
+                calculateDimensions();
+                updateFixedState();
+            });
+
+            updateFixedState();
+            requestAnimationFrame(animate);
+        })();
     </script>
 </body>
 

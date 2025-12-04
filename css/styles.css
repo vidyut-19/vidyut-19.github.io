@@ -2,8 +2,8 @@
 
 /* Typography Variables */
 :root {
-  --font-heading: 'Cormorant Garamond', 'CMU Serif', Georgia, serif;
-  --font-body: 'CMU Serif', 'Computer Modern Serif', 'Latin Modern Roman', Georgia, 'Times New Roman', serif;
+  --font-heading: 'CMU Serif', 'Computer Modern Serif', 'Latin Modern Roman', Georgia, serif;
+  --font-body: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 }
 
 /* Smallcaps for acronyms */
@@ -19,7 +19,7 @@ header {
   }
 
   main {
-  line-height: 1.7;
+  line-height: 1.4;
   }
 
   @font-face {
@@ -33,9 +33,9 @@ header {
   body {
     background-color: #fffff8;  /* Tufte off-white */
     color: #111;
-    font-family: 'CMU Serif', 'Computer Modern Serif', 'Latin Modern Roman', Georgia, 'Times New Roman', serif;
-    font-size: 18px;
-    line-height: 1.55; /* closer to TeX default */
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 1.4;
     margin: 0 auto;
     max-width: 72ch;
     padding-left: 1.5rem;
@@ -55,12 +55,13 @@ header {
 
   /* Headings scale tuned for readability */
   h1 {
-    font-size: clamp(2.75rem, 5vw, 3.5rem);
-    line-height: 1.1;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin-top: 1.75rem;
-    margin-bottom: 0.75rem;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    line-height: 1.15;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .slash-title {
@@ -70,31 +71,29 @@ header {
 
   h2 {
     font-family: var(--font-heading);
-    font-size: clamp(1.75rem, 3.5vw, 2rem);
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    margin-top: 2.5rem;
-    margin-bottom: 0.75rem;
-    font-feature-settings: "kern" 1, "liga" 1;
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 0.4rem;
   }
 
   h3 {
     font-family: var(--font-heading);
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    font-weight: 600;
-    letter-spacing: 0.015em;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-feature-settings: "kern" 1, "liga" 1;
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
   }
 
   h4 {
     font-family: var(--font-heading);
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     font-weight: 400;
-    letter-spacing: 0.02em;
-    margin-top: 1.25rem;
-    margin-bottom: 0.4rem;
+    letter-spacing: 0;
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
   }
 
   /* Prose tweaks: inline and block code */
@@ -126,15 +125,10 @@ header {
     color: #374151;
   }
 
-  /* LaTeX-like paragraph rhythm */
+  /* Paragraph rhythm */
   p {
-    margin: 0 0 1em;
+    margin: 0 0 0.75em;
     hyphens: auto;
-  }
-  /* Indent subsequent paragraphs like TeX */
-  p + p {
-    text-indent: 1.25em;
-    margin-top: 0;
   }
 
   /* Dark theme variants */
@@ -173,10 +167,9 @@ header {
   gap: 15px;
 }
 
-.header-left h1,
-.header-left h2 {
+.header-left h1 {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-heading);
 }
 
 .profile-pic {
@@ -261,9 +254,6 @@ body.dark-theme a:active {
   text-decoration: underline;
   }
   
-  li:not(:last-child) {
-  margin-bottom: 15px;
-  }
   .social-media-list {
   list-style: none;
   padding: 0;
@@ -344,6 +334,7 @@ body::before {
 body.dark-theme::after {
   background-color: rgba(0, 0, 0, 0.28);
   border-top: 1px solid rgba(255, 255, 255, 0.10);
+  color: #e0e0e0;
 }
 
 /* Model viewer section styling */
@@ -373,6 +364,107 @@ model-viewer {
   h1 {
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
+  }
+}
+
+/* ============================================
+   Lens Scroller Navigation
+   ============================================ */
+
+.lens-scroller-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.lens-scroller-wrapper.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: inherit;
+  padding: 0.75rem 0;
+  transition: opacity 0.3s ease;
+}
+
+.lens-scroller-wrapper.is-fixed .lens-scroller {
+  max-width: 72ch;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.lens-scroller-placeholder {
+  display: none;
+  height: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.lens-scroller-placeholder.active {
+  display: block;
+}
+
+.lens-scroller {
+  position: relative;
+  overflow: hidden;
+  height: 2rem;
+  /* Edge fade mask - very subtle fade at edges */
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.lens-scroller-track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+  width: max-content;
+}
+
+.lens-scroller-track.grabbing {
+  cursor: grabbing;
+}
+
+.lens-item {
+  font-family: 'CMU Serif', 'Computer Modern Serif', 'Latin Modern Roman', Georgia, serif;
+  font-variant: small-caps;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+  flex-shrink: 0;
+  padding: 0.5rem 0;
+}
+
+.lens-item:hover {
+  text-decoration: none;
+}
+
+.lens-item.current {
+  font-weight: 700;
+}
+
+/* Dark theme support */
+body.dark-theme .lens-scroller-wrapper.is-fixed {
+  background-color: #1a1a1a;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .lens-scroller-wrapper.is-fixed .lens-scroller {
+    padding: 0 1rem;
+  }
+
+  .lens-scroller-track {
+    gap: 2rem;
+  }
+
+  .lens-item {
+    font-size: 0.65rem;
   }
 }
   
