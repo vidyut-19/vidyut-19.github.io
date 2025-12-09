@@ -24,10 +24,10 @@ header {
 
   @font-face {
     font-family: 'ZT Bros Oskon 90s';
-    src: url('../fonts/ZTBrosOskon90s.woff2') format('woff2'),
-         url('../fonts/ZTBrosOskon90s.woff') format('woff');
+    src: url('../fonts/ZTBrosOskon90s.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
   
   body {
@@ -466,5 +466,100 @@ body.dark-theme .lens-scroller-wrapper.is-fixed {
   .lens-item {
     font-size: 0.65rem;
   }
+}
+
+/* ============================================
+   Spotify Lazy Load Placeholder
+   ============================================ */
+
+.spotify-placeholder {
+    width: 100%;
+    height: 352px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #282828 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.spotify-placeholder:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 20px rgba(29, 185, 84, 0.3);
+}
+
+.spotify-load-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.spotify-load-btn svg {
+    transition: transform 0.2s ease;
+}
+
+.spotify-placeholder:hover .spotify-load-btn svg {
+    transform: scale(1.1);
+}
+
+.spotify-placeholder iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+}
+
+.spotify-placeholder.loaded {
+    cursor: default;
+}
+
+.spotify-placeholder.loaded:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* ============================================
+   View Transitions API
+   ============================================ */
+
+/* Keep shell elements stable during transitions */
+header, .lens-scroller-wrapper {
+    view-transition-name: shell;
+}
+
+::view-transition-old(shell),
+::view-transition-new(shell) {
+    animation: none;
+}
+
+/* Smooth content transitions */
+main, #content {
+    view-transition-name: content;
+}
+
+::view-transition-old(content) {
+    animation: vt-fade-out 0.1s ease-out forwards;
+}
+
+::view-transition-new(content) {
+    animation: vt-fade-in 0.15s ease-in forwards;
+}
+
+@keyframes vt-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes vt-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
   
