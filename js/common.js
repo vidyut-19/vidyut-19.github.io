@@ -122,20 +122,26 @@ updateBannerOffset();
     }
 
     function snapToNearest() {
+        // From the formula: currentX = scrollerCenter - itemActualWidth/2 - index * itemWidth
+        // Solving for index: index = (scrollerCenter - itemActualWidth/2 - currentX) / itemWidth
         const itemActualWidth = itemWidth - gap;
-        const centerOffset = scrollerCenter - itemActualWidth / 2;
-        const relativeX = currentX + centerOffset;
-        const nearestIndex = Math.round(-relativeX / itemWidth);
-        targetX = -nearestIndex * itemWidth - centerOffset;
+        const rawIndex = (scrollerCenter - itemActualWidth / 2 - currentX) / itemWidth;
+        const nearestIndex = Math.round(rawIndex);
+        targetX = scrollerCenter - itemActualWidth / 2 - nearestIndex * itemWidth;
     }
 
     function animate() {
         if (!initialized) {
             calculateDimensions();
-            if (itemWidth > 0) {
+            if (itemWidth > 0 && scrollerCenter > 0) {
+                // To center item N of the middle set (items 5-9):
+                // - Item N's left edge is at: (itemCount + currentPageIndex) * itemWidth = setWidth + currentPageIndex * itemWidth
+                // - We want item N's center at scrollerCenter
+                // - Item center = item left + (itemWidth - gap) / 2
+                // - So: setWidth + currentPageIndex * itemWidth + currentX + (itemWidth - gap) / 2 = scrollerCenter
+                // - Solving: currentX = scrollerCenter - (itemWidth - gap) / 2 - setWidth - currentPageIndex * itemWidth
                 const itemActualWidth = itemWidth - gap;
-                const centerOffset = scrollerCenter - itemActualWidth / 2;
-                currentX = -setWidth - currentPageIndex * itemWidth + centerOffset;
+                currentX = scrollerCenter - itemActualWidth / 2 - setWidth - currentPageIndex * itemWidth;
                 targetX = currentX;
                 initialized = true;
             }
