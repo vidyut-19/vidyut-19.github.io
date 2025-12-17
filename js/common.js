@@ -7,12 +7,42 @@
 // ============================================
 const updateBannerOffset = () => {
     const y = window.scrollY || window.pageYOffset;
-    const x = Math.sin(y / 120) * 80;
+    // Continuous scroll - moves left as you scroll down
+    const x = -(y * 0.5);
     document.body.style.setProperty('--vb-banner-offset', (y % 120) + 'px');
     document.body.style.setProperty('--vb-banner-x-offset', x + 'px');
 };
 window.addEventListener('scroll', updateBannerOffset, { passive: true });
 updateBannerOffset();
+
+// ============================================
+// Plane Runway Animation
+// ============================================
+(function initPlaneAnimation() {
+    const plane = document.getElementById('plane');
+    if (!plane) return;
+
+    const updatePlanePosition = () => {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? scrollY / docHeight : 0;
+        const viewportWidth = window.innerWidth;
+        const planeWidth = plane.offsetWidth || 200;
+        // Move from right to left as user scrolls down
+        const planeX = viewportWidth - scrollPercent * (viewportWidth + planeWidth);
+        plane.style.transform = `translateX(${planeX}px)`;
+    };
+
+    // Wait for image to load before first position update
+    if (plane.complete) {
+        updatePlanePosition();
+    } else {
+        plane.addEventListener('load', updatePlanePosition);
+    }
+    
+    window.addEventListener('scroll', updatePlanePosition, { passive: true });
+    window.addEventListener('resize', updatePlanePosition, { passive: true });
+})();
 
 // ============================================
 // Theme Toggle
@@ -39,6 +69,11 @@ updateBannerOffset();
         const isDark = body.classList.contains('dark-theme');
         localStorage.setItem('theme', isDark ? 'dark-theme' : '');
         renderIcon();
+        // Update fixed menu background when theme changes
+        const wrapper = document.getElementById('lens-scroller-wrapper');
+        if (wrapper && wrapper.classList.contains('is-fixed')) {
+            wrapper.style.backgroundColor = getComputedStyle(document.body).backgroundColor;
+        }
     });
 })();
 
@@ -58,17 +93,22 @@ updateBannerOffset();
 
     const currentPath = window.location.pathname;
     const pageMap = {
-        'projects': 'projects.html',
-        'essays': 'essays.html',
-        'hobbies': 'hobbies.html',
-        'contact': 'contact.html',
-        'javelin': 'javelin.html'
+        'projects': ['projects.html', 'projects'],
+        'essays': ['essays.html', 'essays'],
+        'hobbies': ['hobbies.html', 'hobbies', 'pastimes'],
+        'contact': ['contact.html', 'contact', 'social', 'socials'],
+        'javelin': ['javelin.html', 'javelin']
     };
+
+    // Check if path matches any of the page patterns
+    function pathMatchesPage(path, patterns) {
+        return patterns.some(pattern => path.includes(pattern));
+    }
 
     let currentPageIndex = 0;
     items.forEach((item, index) => {
         const page = item.dataset.page;
-        if (currentPath.includes(pageMap[page])) {
+        if (pageMap[page] && pathMatchesPage(currentPath, pageMap[page])) {
             item.classList.add('current');
             if (index < itemCount) currentPageIndex = index;
         }
@@ -204,6 +244,7 @@ updateBannerOffset();
             isFixed = false;
             wrapper.classList.remove('is-fixed');
             if (placeholder) placeholder.classList.remove('active');
+            wrapper.style.backgroundColor = '';  // Clear inline style when unfixed
         }
     }
 
@@ -231,39 +272,26 @@ updateBannerOffset();
     updateFixedState();
     requestAnimationFrame(animate);
 
+    // Scroll to center a specific page index
+    function scrollToPageIndex(pageIndex) {
+        if (!initialized || itemWidth <= 0) return;
+        const itemActualWidth = itemWidth - gap;
+        targetX = scrollerCenter - itemActualWidth / 2 - setWidth - pageIndex * itemWidth;
+    }
+
     // Export function to update current page indicator (used by router)
     window.updateLensScrollerCurrent = function(url) {
         const filename = url.split('/').pop() || 'index.html';
-        items.forEach(item => {
+        let newCurrentIndex = 0;
+        items.forEach((item, index) => {
             item.classList.remove('current');
             const itemPage = item.dataset.page;
-            if (pageMap[itemPage] && filename.includes(pageMap[itemPage])) {
+            if (pageMap[itemPage] && pathMatchesPage(filename, pageMap[itemPage])) {
                 item.classList.add('current');
+                if (index < itemCount) newCurrentIndex = index;
             }
         });
+        // Center the carousel on the new current page
+        scrollToPageIndex(newCurrentIndex);
     };
-})();
-
-// ============================================
-// Spotify Lazy Load
-// ============================================
-(function initSpotifyLazyLoad() {
-    const placeholder = document.getElementById('spotify-embed');
-    if (!placeholder) return;
-
-    const loadSpotify = () => {
-        const src = placeholder.dataset.src;
-        if (!src || placeholder.classList.contains('loaded')) return;
-
-        const iframe = document.createElement('iframe');
-        iframe.src = src;
-        iframe.setAttribute('allowfullscreen', '');
-        iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
-
-        placeholder.innerHTML = '';
-        placeholder.appendChild(iframe);
-        placeholder.classList.add('loaded');
-    };
-
-    placeholder.addEventListener('click', loadSpotify);
 })();
