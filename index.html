@@ -1,97 +1,209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Prevent theme flash -->
-    <script>(function(){var t=localStorage.getItem('theme');if(t){document.documentElement.classList.add(t);document.body&&document.body.classList.add(t);}})();</script>
-    <!-- Preconnect to external origins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <!-- Prefetch other pages -->
-    <link rel="prefetch" href="projects.html" as="document">
-    <link rel="prefetch" href="essays.html" as="document">
-    <link rel="prefetch" href="contact.html" as="document">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <title>Vidyut Baradwaj</title>
-</head>
-<body>
-    <header id="banner">
-        <div class="header-container">
-            <div class="header-left">
-                <img src="assets/images/profile.jpg" alt="Profile Picture" class="profile-pic">
-                <h1><a href="index.html">Vidyut Baradwaj</a> <span class="slash-title">/ Home</span></h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Prevent theme flash -->
+        <script>
+            (function () {
+                var t = localStorage.getItem("theme");
+                if (t) {
+                    document.documentElement.classList.add(t);
+                    document.body && document.body.classList.add(t);
+                }
+            })();
+        </script>
+        <!-- Preconnect to external origins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Prefetch other pages -->
+        <link rel="prefetch" href="projects.html" as="document" />
+        <link rel="prefetch" href="essays.html" as="document" />
+        <link rel="prefetch" href="contact.html" as="document" />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <title>Vidyut Baradwaj</title>
+    </head>
+    <body>
+        <header id="banner">
+            <div class="header-container">
+                <div class="header-left">
+                    <img
+                        src="assets/images/profile.jpg"
+                        alt="Profile Picture"
+                        class="profile-pic"
+                    />
+                    <h1>
+                        <a href="index.html">Vidyut Baradwaj</a>
+                        <span class="slash-title">/ Home</span>
+                    </h1>
+                </div>
+                <button
+                    id="theme-toggle"
+                    aria-label="Toggle theme"
+                    title="Toggle theme"
+                ></button>
             </div>
-            <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
-        </div>
-    </header>
+        </header>
 
-    <!-- Lens Scroller Navigation -->
-    <div class="lens-scroller-wrapper" id="lens-scroller-wrapper">
-        <div class="lens-scroller" id="lens-scroller">
-            <div class="lens-scroller-track" id="lens-track">
-                <!-- Set 1 -->
-                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
-                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
-                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
-                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
-                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
-                <!-- Set 2 -->
-                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
-                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
-                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
-                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
-                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
-                <!-- Set 3 -->
-                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
-                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
-                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
-                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
-                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
+        <!-- Lens Scroller Navigation -->
+        <div class="lens-scroller-wrapper" id="lens-scroller-wrapper">
+            <div class="lens-scroller" id="lens-scroller">
+                <div class="lens-scroller-track" id="lens-track">
+                    <!-- Set 1 -->
+                    <a
+                        href="projects.html"
+                        class="lens-item"
+                        data-page="projects"
+                        >Projects</a
+                    >
+                    <a href="essays.html" class="lens-item" data-page="essays"
+                        >Essays</a
+                    >
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
+                        >Pastimes</a
+                    >
+                    <a href="contact.html" class="lens-item" data-page="contact"
+                        >Socials</a
+                    >
+                    <a href="javelin.html" class="lens-item" data-page="javelin"
+                        >Javelin</a
+                    >
+                    <!-- Set 2 -->
+                    <a
+                        href="projects.html"
+                        class="lens-item"
+                        data-page="projects"
+                        >Projects</a
+                    >
+                    <a href="essays.html" class="lens-item" data-page="essays"
+                        >Essays</a
+                    >
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
+                        >Pastimes</a
+                    >
+                    <a href="contact.html" class="lens-item" data-page="contact"
+                        >Socials</a
+                    >
+                    <a href="javelin.html" class="lens-item" data-page="javelin"
+                        >Javelin</a
+                    >
+                    <!-- Set 3 -->
+                    <a
+                        href="projects.html"
+                        class="lens-item"
+                        data-page="projects"
+                        >Projects</a
+                    >
+                    <a href="essays.html" class="lens-item" data-page="essays"
+                        >Essays</a
+                    >
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
+                        >Pastimes</a
+                    >
+                    <a href="contact.html" class="lens-item" data-page="contact"
+                        >Socials</a
+                    >
+                    <a href="javelin.html" class="lens-item" data-page="javelin"
+                        >Javelin</a
+                    >
+                    <!-- Set 4 -->
+                    <a
+                        href="projects.html"
+                        class="lens-item"
+                        data-page="projects"
+                        >Projects</a
+                    >
+                    <a href="essays.html" class="lens-item" data-page="essays"
+                        >Essays</a
+                    >
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
+                        >Pastimes</a
+                    >
+                    <a href="contact.html" class="lens-item" data-page="contact"
+                        >Socials</a
+                    >
+                    <a href="javelin.html" class="lens-item" data-page="javelin"
+                        >Javelin</a
+                    >
+                </div>
             </div>
         </div>
-    </div>
-    <div class="lens-scroller-placeholder" id="lens-placeholder"></div>
+        <div class="lens-scroller-placeholder" id="lens-placeholder"></div>
 
-    <main id="content">
-        <p>I am currently helping build the intelligence layer of athlete marketing at <a href="javelin.html">Javelin</a>.</p>
+        <main id="content">
+            <p>
+                I am currently helping build the intelligence layer of athlete
+                marketing at <a href="javelin.html">Javelin</a>.
+            </p>
 
-        <p>I studied computational and applied math at UChicago. My coursework was a blend of analysis, theoretical statistics, numerical methods, machine learning, and optimization. More recently I completed a master's in computer science as part of a BS/MS program. I learnt to write concurrent code in Go, make games in Haskell, and build web apps with AWS, including big data ones with Spark, Hive, and Kafka.</p>
+            <p>
+                I studied computational and applied math at UChicago. My
+                coursework was a blend of analysis, theoretical statistics,
+                numerical methods, machine learning, and optimization. More
+                recently I completed a master's in computer science as part of a
+                BS/MS program. I learnt to write concurrent code in Go, make
+                games in Haskell, and build web apps with AWS, including big
+                data ones with Spark, Hive, and Kafka.
+            </p>
 
-        <p>I worked at another startup, <a href="https://trajektory.com/">Trajektory</a>, before this. Beyond that, I did some research, and graded a few classes, and worked at a few bigger companies. When I found time, I did competitive <a href="https://www.youtube.com/watch?v=FhJwJ90ksXc">Bhangra</a>, started a Bollywood-Rock band named AC/Desi, and watched a lot of HBO with my friends.</p>
+            <p>
+                I worked at another startup,
+                <a href="https://trajektory.com/">Trajektory</a>, before this.
+                Beyond that, I did some research, and graded a few classes, and
+                worked at a few bigger companies. When I found time, I did
+                competitive
+                <a href="https://www.youtube.com/watch?v=FhJwJ90ksXc">Bhangra</a
+                >, started a Bollywood-Rock band named AC/Desi, and watched a
+                lot of HBO with my friends.
+            </p>
 
-        <nav>
+            <nav>
+                <ul>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="essays.html">Essays</a></li>
+                    <li><a href="hobbies.html">Hobbies</a></li>
+                    <li><a href="contact.html">My @'s</a></li>
+                    <li>
+                        <a href="https://vidyuts.substack.com/"
+                            >hard kaapi (my blog)</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+
+            <h3>Current Media</h3>
             <ul>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="essays.html">Essays</a></li>
-                <li><a href="hobbies.html">Hobbies</a></li>
-                <li><a href="contact.html">My @'s</a></li>
-                <li><a href="https://vidyuts.substack.com/">hard kaapi (my blog)</a></li>
+                <li>The Lord of the Rings Trilogy</li>
+                <li>Mad Men Season 5</li>
             </ul>
-        </nav>
+        </main>
 
-        <h3>Current Media</h3>
-        <ul>
-            <li>The Lord of the Rings Trilogy</li>
-            <li>Mad Men Season 5</li>
-        </ul>
-    </main>
+        <footer>
+            <p>© 2025 Vidyut Baradwaj.</p>
+        </footer>
 
-    <footer>
-        <p>© 2025 Vidyut Baradwaj.</p>
-    </footer>
+        <!-- Plane runway animation -->
+        <div class="plane-runway" id="plane-runway">
+            <img
+                src="assets/images/plane_sticker.png"
+                alt=""
+                class="plane"
+                id="plane"
+            />
+        </div>
 
-    <!-- Plane runway animation -->
-    <div class="plane-runway" id="plane-runway">
-        <img src="assets/images/plane_sticker.png" alt="" class="plane" id="plane">
-    </div>
-
-    <script src="js/common.js" defer></script>
-    <script src="js/router.js" defer></script>
-</body>
+        <script src="js/common.js" defer></script>
+        <script src="js/router.js" defer></script>
+    </body>
 </html>
