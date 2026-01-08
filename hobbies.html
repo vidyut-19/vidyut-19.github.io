@@ -1,78 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Prevent theme flash -->
-    <script>(function(){var t=localStorage.getItem('theme');if(t){document.documentElement.classList.add(t);document.body&&document.body.classList.add(t);}})();</script>
-    <!-- Preconnect to external origins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <title>Pastimes - Vidyut Baradwaj</title>
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class="header-left">
-                <h1><a href="index.html">Vidyut Baradwaj</a> <span class="slash-title">/ Pastimes</span></h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Prevent theme flash -->
+        <script>
+            (function () {
+                var t = localStorage.getItem("theme");
+                if (t) {
+                    document.documentElement.classList.add(t);
+                    document.body && document.body.classList.add(t);
+                }
+            })();
+        </script>
+        <!-- Preconnect to external origins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <title>Pastimes - Vidyut Baradwaj</title>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <div class="header-left">
+                    <h1>
+                        <a href="index.html">Vidyut Baradwaj</a>
+                        <span class="slash-title">/ Pastimes</span>
+                    </h1>
+                </div>
+                <button
+                    id="theme-toggle"
+                    aria-label="Toggle theme"
+                    title="Toggle theme"
+                ></button>
             </div>
-            <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
-        </div>
-    </header>
+        </header>
 
-    <!-- Lens Scroller Navigation -->
-    <div class="lens-scroller-wrapper" id="lens-scroller-wrapper">
-        <div class="lens-scroller" id="lens-scroller">
-            <div class="lens-scroller-track" id="lens-track">
-                <!-- Set 1 -->
-                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
-                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
-                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
-                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
-                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
-                <!-- Set 2 -->
-                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
-                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
-                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
-                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
-                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
-                <!-- Set 3 -->
-                <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
-                <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
-                <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
-                <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
-                <a href="javelin.html" class="lens-item" data-page="javelin">Javelin</a>
+        <!-- Lens Scroller Navigation -->
+        <div class="lens-scroller-wrapper" id="lens-scroller-wrapper">
+            <div class="lens-scroller" id="lens-scroller">
+                <div class="lens-scroller-track" id="lens-track">
+                    <!-- Set 1 -->
+                    <a
+                        href="projects.html"
+                        class="lens-item"
+                        data-page="projects"
+                        >Projects</a
+                    >
+                    <a href="essays.html" class="lens-item" data-page="essays"
+                        >Essays</a
+                    >
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
+                        >Pastimes</a
+                    >
+                    <a href="contact.html" class="lens-item" data-page="contact"
+                        >Socials</a
+                    >
+                    <a href="javelin.html" class="lens-item" data-page="javelin"
+                        >Javelin</a
+                    >
+                    <!-- Set 2 -->
+                    <a
+                        href="projects.html"
+                        class="lens-item"
+                        data-page="projects"
+                        >Projects</a
+                    >
+                    <a href="essays.html" class="lens-item" data-page="essays"
+                        >Essays</a
+                    >
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
+                        >Pastimes</a
+                    >
+                    <a href="contact.html" class="lens-item" data-page="contact"
+                        >Socials</a
+                    >
+                    <a href="javelin.html" class="lens-item" data-page="javelin"
+                        >Javelin</a
+                    >
+                    <!-- Set 3 -->
+                    <a
+                        href="projects.html"
+                        class="lens-item"
+                        data-page="projects"
+                        >Projects</a
+                    >
+                    <a href="essays.html" class="lens-item" data-page="essays"
+                        >Essays</a
+                    >
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
+                        >Pastimes</a
+                    >
+                    <a href="contact.html" class="lens-item" data-page="contact"
+                        >Socials</a
+                    >
+                    <a href="javelin.html" class="lens-item" data-page="javelin"
+                        >Javelin</a
+                    >
+                </div>
             </div>
         </div>
-    </div>
-    <div class="lens-scroller-placeholder" id="lens-placeholder"></div>
+        <div class="lens-scroller-placeholder" id="lens-placeholder"></div>
 
-    <main>
-      <p><i>*non exhaustive</i></p>
-      <ul>
-        <li>Making and drinking coffee with my AeroPress</li>
-        <li>Biking on the West Side Highway</li>
-        <li>Curating my <a href="https://open.spotify.com/user/techbuster1909?si=2192211ed0ae45b3">Spotify playlists</a></li>
-        <li>Learning new Bhangra choreo</li>
-        <li>Mixing house tunes on my DJ controller</li>
-        <li>Twisting my ankles playing tennis</li>
-        <li>Reading about the TV shows I watch</li>
-        <li>Watching video essays on YouTube</li>
-      </ul>
-    </main>
+        <main>
+            <p><i>*non exhaustive</i></p>
+            <ul>
+                <li>Making and drinking coffee with my AeroPress</li>
+                <li>Biking on the West Side Highway</li>
+                <li>
+                    Curating my
+                    <a
+                        href="https://open.spotify.com/user/techbuster1909?si=2192211ed0ae45b3"
+                        >Spotify playlists</a
+                    >
+                </li>
+                <li>Learning new Bhangra choreo</li>
+                <li>Mixing house tunes on my DJ controller</li>
+                <li>Twisting my ankles playing tennis</li>
+                <li>Reading about the TV shows I watch</li>
+                <li>Watching video essays on YouTube</li>
+            </ul>
+        </main>
 
-    
+        <footer class="massive-footer">
+            <div class="footer-scene">
+                <img
+                    src="assets/images/footer.png"
+                    alt="Bedroom scene"
+                    class="footer-bg"
+                />
 
-    <footer>
-        <p>&copy; 2025 Vidyut Baradwaj. All rights reserved.</p>
-    </footer>
-    <script src="js/common.js" defer></script>
-    <script src="js/router.js" defer></script>
-</body>
+                <!-- Clickable hotspots - position these over elements in the drawing -->
+                <div class="footer-hotspots">
+                    <!-- Add hotspots as needed later -->
+                </div>
+
+                <!-- Spotify Visualizer Container - positioned bottom right -->
+                <div class="visualizer-container" id="visualizer-container">
+                    <iframe
+                        id="spotify-visualizer"
+                        src="visualizer/index.html"
+                        title="Spotify Visualizer"
+                        loading="lazy"
+                    ></iframe>
+                    <div class="visualizer-fallback" id="visualizer-fallback">
+                        <button id="spotify-connect-btn">
+                            Connect Spotify
+                        </button>
+                        <p class="visualizer-status">
+                            See what I'm listening to
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2025 Vidyut Baradwaj.</p>
+            </div>
+        </footer>
+        <script src="js/common.js" defer></script>
+        <script src="js/router.js" defer></script>
+        <script src="js/spotify-footer.js" defer></script>
+    </body>
 </html>
