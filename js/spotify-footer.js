@@ -4,9 +4,8 @@
 
 (function() {
     // API base URL
-    const API_BASE = window.location.hostname === 'localhost'
-        ? ''
-        : 'https://vidyut-19-github-io.vercel.app';
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const API_BASE = isLocal ? '' : 'https://vidyut-19-github-io.vercel.app';
 
     const visualizerIframe = document.getElementById('spotify-visualizer');
     const fallback = document.getElementById('visualizer-fallback');
