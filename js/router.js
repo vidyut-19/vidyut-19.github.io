@@ -13,7 +13,7 @@
     "essays.html",
     "hobbies.html",
     "contact.html",
-    "javelin.html",
+    "now.html",
   ];
 
   // ============================================

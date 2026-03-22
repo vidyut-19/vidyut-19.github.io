@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- Prevent theme flash -->
         <script>
             (function () {
                 var t = localStorage.getItem("theme");
@@ -13,11 +12,9 @@
                 }
             })();
         </script>
-        <!-- Preconnect to external origins -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-        <!-- Stylesheets -->
         <link rel="stylesheet" href="css/styles.css" />
         <link
             rel="stylesheet"
@@ -28,9 +25,8 @@
             rel="stylesheet"
         />
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-        <title>Vidyut Baradwaj</title>
+        <title>Projects - Vidyut Baradwaj</title>
     </head>
-
     <body>
         <header id="banner">
             <div class="header-container">
@@ -48,282 +44,134 @@
             </div>
         </header>
 
-        <!-- Lens Scroller Navigation -->
         <div class="lens-scroller-wrapper" id="lens-scroller-wrapper">
             <div class="lens-scroller" id="lens-scroller">
                 <div class="lens-scroller-track" id="lens-track">
-                    <!-- Set 1 -->
-                    <a
-                        href="projects.html"
-                        class="lens-item"
-                        data-page="projects"
-                        >Projects</a
-                    >
-                    <a href="essays.html" class="lens-item" data-page="essays"
-                        >Essays</a
-                    >
-                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
-                        >Pastimes</a
-                    >
-                    <a href="contact.html" class="lens-item" data-page="contact"
-                        >Socials</a
-                    >
-                    <a href="javelin.html" class="lens-item" data-page="javelin"
-                        >Javelin</a
-                    >
-                    <!-- Set 2 -->
-                    <a
-                        href="projects.html"
-                        class="lens-item"
-                        data-page="projects"
-                        >Projects</a
-                    >
-                    <a href="essays.html" class="lens-item" data-page="essays"
-                        >Essays</a
-                    >
-                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
-                        >Pastimes</a
-                    >
-                    <a href="contact.html" class="lens-item" data-page="contact"
-                        >Socials</a
-                    >
-                    <a href="javelin.html" class="lens-item" data-page="javelin"
-                        >Javelin</a
-                    >
-                    <!-- Set 3 -->
-                    <a
-                        href="projects.html"
-                        class="lens-item"
-                        data-page="projects"
-                        >Projects</a
-                    >
-                    <a href="essays.html" class="lens-item" data-page="essays"
-                        >Essays</a
-                    >
-                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
-                        >Pastimes</a
-                    >
-                    <a href="contact.html" class="lens-item" data-page="contact"
-                        >Socials</a
-                    >
-                    <a href="javelin.html" class="lens-item" data-page="javelin"
-                        >Javelin</a
-                    >
+                    <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                    <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                    <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                    <a href="now.html" class="lens-item" data-page="now">Now</a>
+                    <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                    <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                    <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                    <a href="now.html" class="lens-item" data-page="now">Now</a>
+                    <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                    <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                    <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                    <a href="now.html" class="lens-item" data-page="now">Now</a>
                 </div>
             </div>
         </div>
         <div class="lens-scroller-placeholder" id="lens-placeholder"></div>
 
         <main id="content">
+            <p>A mix of school projects, research papers, and side quests.</p>
+
+            <h3>Javelin</h3>
             <p>
-                Here are some things I've worked on and am currently working on.
+                Helped build the intelligence layer of athlete marketing
+                at Javelin, an AI-native operating system for the athlete
+                economy that connects brands with athletes. Built with
+                NextJS, React Native, and AWS (Lambda, Amplify, Athena,
+                Bedrock). Features included semantic search powered by
+                pgvector, a Go-based data pipeline with SQS, and an AI
+                command center using OpenAI's structured outputs with SSE
+                streaming.
             </p>
 
-            <div class="experience">
-                <h3><b>CTA Delay Predictor</b></h3>
-                <ul>
-                    <li>
-                        A web app that predicts the delay of a CTA train based
-                        on the time of day, day of the week, and the station.
-                    </li>
-                    <li>
-                        Uses Kafka and Spark to process data from the CTA's API
-                    </li>
-                    <li>
-                        Used Hive and HBase to store and process historical
-                        ridership and weather data
-                    </li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3><b>Tech Titans: eBay Clone</b></h3>
-                <ul>
-                    <li>
-                        A clone of eBay built with a microservices architecture
-                    </li>
-                    <li>
-                        Uses RabbitMQ, PostgreSQL, MongoDB to manage inventory
-                        and user data
-                    </li>
-                    <li>Uses Docker for deployment</li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3><b>vb-FaaS: A Serverless Function as a Service</b></h3>
-                <ul>
-                    <li>
-                        Uses Redis, multithreading, RabbitMQ, and FastAPI to
-                        handle concurrent requests
-                    </li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3><b>FastConv Image Processor</b></h3>
-                <ul>
-                    <li>
-                        Concurrent Go program with convolution engine and ray
-                        tracer using pipelining and dynamic work stealing
-                        offering up to 6X speedups.
-                    </li>
-                    <li>
-                        Includes sharpening, blurring, grayscale, and edge
-                        detection. Sequential implementation included.
-                    </li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3>
-                    <b
-                        >SinkyViT: Sparse Sinkhorn Attention Vision
-                        Transformer</b
-                    >
-                </h3>
-                <ul>
-                    <li>
-                        ViT with Sparse Sinkhorn Attention for improved
-                        efficiency in image classification (15% reduced FLOPs
-                        estimated).
-                    </li>
-                    <li>Tested on MNIST and CIFAR-10 dataset</li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3><b>Phil: An Advisor for UChicago Undergraduates</b></h3>
-                <ul>
-                    <li>
-                        Developed search engine for course catalog queries with
-                        front-end chatbot interface built on Flask.
-                    </li>
-                    <li>
-                        Includes sentiment analyzer built using Selenium and
-                        NLTK for smart course selection assistance for
-                        undergraduates.
-                    </li>
-                </ul>
-                <p>
-                    <em
-                        >Note: I helped make this before GPT-3 was out. I intend
-                        on upgrading it with Llama 3.</em
-                    >
-                </p>
-            </div>
-            <div class="experience">
-                <h3>
-                    <b
-                        >GAS: AWS-based Full-stack SaaS for Genomics
-                        Annotation</b
-                    >
-                </h3>
-                <ul>
-                    <li>
-                        Multi-tiered architecture with Flask front-end,
-                        integrated AWS services for scalability and performance.
-                    </li>
-                    <li>
-                        Used Amazon EC2, S3, DynamoDB and SQS functions for
-                        automatic scaling and archival processes with
-                        free/premium user bifurcation.
-                    </li>
-                    <li>Integrated with Globus OAuth service</li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3><b>Tale of Two Cities</b></h3>
-                <ul>
-                    <li>
-                        I wrote a 25-page mini-thesis on differing Indian
-                        immigrant experiences in Doha and San Francisco.
-                    </li>
-                    <li>
-                        Paired it with a sociological framework as to how
-                        educational level affected their socio-economic
-                        outcomes, among other factors.
-                    </li>
-                    <li>
-                        Using some Python, I scraped some geo-tagged tweets and
-                        did some sentiment analysis as part of the methodology.
-                    </li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3><b>Where's My Uber</b></h3>
-                <ul>
-                    <li>
-                        A shorter paper, this one examined the formation of
-                        social microstructures by Uber drivers in response to
-                        the information asymmetry of the rideshare market.
-                    </li>
-                    <li>
-                        Paired it with a sociological framework as to how
-                        educational level affected their socio-economic
-                        outcomes, among other factors.
-                    </li>
-                    <li>
-                        Using some Python, I scraped some geo-tagged tweets and
-                        did some sentiment analysis as part of the methodology.
-                    </li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3><b>Lumiere - Beli meets Letterboxd*</b></h3>
-                <ul>
-                    <li>
-                        Currently working on an app that combines the UX's of
-                        our generation's most beloved two apps (citation needed)
-                    </li>
-                    <li>
-                        Rank-based movie aggregator built on Swift (I used to
-                        remember Flutter)
-                    </li>
-                </ul>
-            </div>
-            <div class="experience">
-                <h3><b>Other Projects (includes some filmmaking)</b></h3>
-                <ul>
-                    <li>GMM, BMM Models with numpy</li>
-                    <li>
-                        GANs and VAEs in PyTorch, tested on CIFAR-10 and MNIST
-                        (naturally)
-                    </li>
-                    <li>SQL Query Engine for Course Catalog</li>
-                    <li>Movie about the invention of a Circle</li>
-                    <li>Some Breaking Bad Cinematography Recreation</li>
-                    <li>Scheduler for IB Students built on Flutter</li>
-                    <li>SASA 2024 Trailer</li>
-                </ul>
-            </div>
-        </main>
-        <footer class="massive-footer">
-            <div class="footer-scene">
-                <!-- Clickable hotspots - position these over elements in the drawing -->
-                <div class="footer-hotspots">
-                    <!-- Add hotspots as needed later -->
-                </div>
+            <h3>CTA Delay Predictor</h3>
+            <p>
+                Predicts CTA train delays based on time of day, day of the
+                week, and station. Built on Kafka and Spark for real-time
+                processing, with Hive and HBase for historical ridership
+                and weather data.
+            </p>
 
-                <!-- Spotify Visualizer Container - positioned bottom right -->
-                <div class="visualizer-container" id="visualizer-container">
-                    <iframe
-                        id="spotify-visualizer"
-                        src="visualizer/index.html"
-                        title="Spotify Visualizer"
-                        loading="lazy"
-                    ></iframe>
-                    <div class="visualizer-fallback" id="visualizer-fallback">
-                        <button id="spotify-connect-btn">
-                            Connect Spotify
-                        </button>
-                        <p class="visualizer-status">
-                            See what I'm listening to
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <p>&copy; 2025 Vidyut Baradwaj.</p>
-            </div>
+            <h3>Tech Titans: eBay Clone</h3>
+            <p>
+                An eBay clone built with a microservices architecture using
+                RabbitMQ, PostgreSQL, and MongoDB, deployed with Docker.
+            </p>
+
+            <h3>vb-FaaS: A Serverless Function as a Service</h3>
+            <p>
+                A FaaS platform using Redis, multithreading, RabbitMQ, and
+                FastAPI to handle concurrent function executions.
+            </p>
+
+            <h3>FastConv Image Processor</h3>
+            <p>
+                A concurrent Go program with a convolution engine and ray
+                tracer. Uses pipelining and dynamic work stealing for up to
+                6x speedups over the sequential version. Supports
+                sharpening, blurring, grayscale, and edge detection.
+            </p>
+
+            <h3>SinkyViT: Sparse Sinkhorn Attention Vision Transformer</h3>
+            <p>
+                A ViT with Sparse Sinkhorn Attention for more efficient
+                image classification, with an estimated 15% reduction in
+                FLOPs. Tested on MNIST and CIFAR-10.
+            </p>
+
+            <h3>Phil: An Advisor for UChicago Undergraduates</h3>
+            <p>
+                A search engine for course catalog queries with a Flask
+                chatbot interface, paired with a sentiment analyzer built
+                on Selenium and NLTK for smarter course selection.
+            </p>
+            <p><em>Built before GPT-3 was out.</em></p>
+
+            <h3>GAS: AWS-based SaaS for Genomics Annotation</h3>
+            <p>
+                A multi-tiered Flask app integrated with EC2, S3, DynamoDB,
+                and SQS for automatic scaling and archival. Features
+                free/premium user tiers and Globus OAuth integration.
+            </p>
+
+            <h3>Tale of Two Cities</h3>
+            <p>
+                A 25-page mini-thesis comparing Indian immigrant
+                experiences in Doha and San Francisco, examining how
+                educational level shaped socio-economic outcomes.
+                Methodology included scraping geo-tagged tweets for
+                sentiment analysis.
+            </p>
+
+            <h3>Where's My Uber</h3>
+            <p>
+                A shorter paper on the formation of social microstructures
+                by Uber drivers in response to the information asymmetry
+                of the rideshare market.
+            </p>
+
+            <h3>Lumiere &mdash; Beli meets Letterboxd*</h3>
+            <p>
+                A rank-based movie aggregator built in Swift, combining the
+                UX of our generation's two most beloved apps (citation
+                needed).
+            </p>
+
+            <h3>Other Projects</h3>
+            <ul>
+                <li>GMM and BMM models with numpy</li>
+                <li>GANs and VAEs in PyTorch on CIFAR-10 and MNIST</li>
+                <li>SQL Query Engine for Course Catalog</li>
+                <li>Movie about the invention of a Circle</li>
+                <li>Breaking Bad Cinematography Recreation</li>
+                <li>Scheduler for IB Students in Flutter</li>
+                <li>SASA 2024 Trailer</li>
+            </ul>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Vidyut Baradwaj.</p>
         </footer>
+
         <script src="js/common.js" defer></script>
         <script src="js/router.js" defer></script>
-        <script src="js/spotify-footer.js" defer></script>
     </body>
 </html>

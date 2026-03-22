@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- Prevent theme flash -->
         <script>
             (function () {
                 var t = localStorage.getItem("theme");
@@ -13,11 +12,9 @@
                 }
             })();
         </script>
-        <!-- Preconnect to external origins -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-        <!-- Stylesheets -->
         <link rel="stylesheet" href="css/styles.css" />
         <link
             rel="stylesheet"
@@ -47,67 +44,24 @@
             </div>
         </header>
 
-        <!-- Lens Scroller Navigation -->
         <div class="lens-scroller-wrapper" id="lens-scroller-wrapper">
             <div class="lens-scroller" id="lens-scroller">
                 <div class="lens-scroller-track" id="lens-track">
-                    <!-- Set 1 -->
-                    <a
-                        href="projects.html"
-                        class="lens-item"
-                        data-page="projects"
-                        >Projects</a
-                    >
-                    <a href="essays.html" class="lens-item" data-page="essays"
-                        >Essays</a
-                    >
-                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
-                        >Pastimes</a
-                    >
-                    <a href="contact.html" class="lens-item" data-page="contact"
-                        >Socials</a
-                    >
-                    <a href="javelin.html" class="lens-item" data-page="javelin"
-                        >Javelin</a
-                    >
-                    <!-- Set 2 -->
-                    <a
-                        href="projects.html"
-                        class="lens-item"
-                        data-page="projects"
-                        >Projects</a
-                    >
-                    <a href="essays.html" class="lens-item" data-page="essays"
-                        >Essays</a
-                    >
-                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
-                        >Pastimes</a
-                    >
-                    <a href="contact.html" class="lens-item" data-page="contact"
-                        >Socials</a
-                    >
-                    <a href="javelin.html" class="lens-item" data-page="javelin"
-                        >Javelin</a
-                    >
-                    <!-- Set 3 -->
-                    <a
-                        href="projects.html"
-                        class="lens-item"
-                        data-page="projects"
-                        >Projects</a
-                    >
-                    <a href="essays.html" class="lens-item" data-page="essays"
-                        >Essays</a
-                    >
-                    <a href="hobbies.html" class="lens-item" data-page="hobbies"
-                        >Pastimes</a
-                    >
-                    <a href="contact.html" class="lens-item" data-page="contact"
-                        >Socials</a
-                    >
-                    <a href="javelin.html" class="lens-item" data-page="javelin"
-                        >Javelin</a
-                    >
+                    <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                    <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                    <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                    <a href="now.html" class="lens-item" data-page="now">Now</a>
+                    <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                    <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                    <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                    <a href="now.html" class="lens-item" data-page="now">Now</a>
+                    <a href="projects.html" class="lens-item" data-page="projects">Projects</a>
+                    <a href="essays.html" class="lens-item" data-page="essays">Essays</a>
+                    <a href="hobbies.html" class="lens-item" data-page="hobbies">Pastimes</a>
+                    <a href="contact.html" class="lens-item" data-page="contact">Socials</a>
+                    <a href="now.html" class="lens-item" data-page="now">Now</a>
                 </div>
             </div>
         </div>
@@ -115,46 +69,17 @@
 
         <main id="content">
             <p>
-                Long-form writing on technology, culture, and ideas. To have
-                them straight to your inbox, subscribe to my
+                Long-form writing on technology, culture, and ideas lives
+                on my
                 <a href="https://vidyuts.substack.com/">Substack</a>.
             </p>
-
-            <ul style="list-style: none; padding: 0; margin-top: 2rem"></ul>
         </main>
 
-        <footer class="massive-footer">
-            <div class="footer-scene">
-                <!-- Clickable hotspots - position these over elements in the drawing -->
-                <div class="footer-hotspots">
-                    <!-- Add hotspots as needed later -->
-                </div>
-
-                <!-- Spotify Visualizer Container - positioned bottom right -->
-                <div class="visualizer-container" id="visualizer-container">
-                    <iframe
-                        id="spotify-visualizer"
-                        src="visualizer/index.html"
-                        title="Spotify Visualizer"
-                        loading="lazy"
-                    ></iframe>
-                    <div class="visualizer-fallback" id="visualizer-fallback">
-                        <button id="spotify-connect-btn">
-                            Connect Spotify
-                        </button>
-                        <p class="visualizer-status">
-                            See what I'm listening to
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <p>&copy; 2025 Vidyut Baradwaj.</p>
-            </div>
+        <footer>
+            <p>&copy; 2025 Vidyut Baradwaj.</p>
         </footer>
 
         <script src="js/common.js" defer></script>
         <script src="js/router.js" defer></script>
-        <script src="js/spotify-footer.js" defer></script>
     </body>
 </html>

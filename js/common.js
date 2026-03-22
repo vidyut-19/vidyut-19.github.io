@@ -100,7 +100,7 @@ updateBannerOffset();
     essays: ["essays.html", "essays"],
     hobbies: ["hobbies.html", "hobbies", "pastimes"],
     contact: ["contact.html", "contact", "social", "socials"],
-    javelin: ["javelin.html", "javelin"],
+    now: ["now.html", "now"],
   };
 
   // Check if path matches any of the page patterns
