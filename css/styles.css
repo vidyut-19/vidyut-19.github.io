@@ -370,7 +370,7 @@ body.dark-theme::after {
 
 .lens-scroller-placeholder {
     display: none;
-    height: 2.5rem;
+    height: 2rem;
     margin-bottom: 1.5rem;
 }
 

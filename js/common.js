@@ -91,7 +91,7 @@ updateBannerOffset();
 
   if (!wrapper || !scroller || !track) return;
 
-  const items = track.querySelectorAll(".lens-item");
+  let items = track.querySelectorAll(".lens-item");
   const itemCount = 5;
 
   const currentPath = window.location.pathname;
@@ -120,6 +120,7 @@ updateBannerOffset();
   let currentX = 0;
   let targetX = 0;
   let isDragging = false;
+  let hasDragged = false;
   let startX = 0;
   let startScrollX = 0;
   let itemWidth = 0;
@@ -127,8 +128,12 @@ updateBannerOffset();
   let scrollerCenter = 0;
   let initialized = false;
   let gap = 0;
+  let itemOffsets = [];
+  let itemWidths = [];
+  let running = false;
+  let wheelSnapTimer = null;
 
-  function calculateDimensions() {
+  function measure() {
     const firstItem = items[0];
     if (!firstItem) return;
     const style = getComputedStyle(track);
@@ -138,20 +143,78 @@ updateBannerOffset();
     scrollerCenter = scroller.offsetWidth / 2;
   }
 
-  function updateDepthEffect() {
-    const centerX = scrollerCenter;
+  // Clone the base item-set until the track is wide enough to fill any
+  // viewport without the infinite-loop wrap exposing blank edges.
+  function ensureEnoughSets() {
+    if (setWidth <= 0) return;
+    const needSets = Math.min(
+      20,
+      Math.max(3, Math.ceil(scroller.offsetWidth / setWidth) + 4),
+    );
+    const currentSets = Math.round(items.length / itemCount);
+    if (currentSets >= needSets) return;
+    const base = Array.from(items).slice(0, itemCount);
+    const frag = document.createDocumentFragment();
+    for (let s = currentSets; s < needSets; s++) {
+      base.forEach((node) => frag.appendChild(node.cloneNode(true)));
+    }
+    track.appendChild(frag);
+    items = track.querySelectorAll(".lens-item");
+  }
+
+  function cacheItemMetrics() {
+    itemOffsets = [];
+    itemWidths = [];
     items.forEach((item) => {
-      const itemRect = item.getBoundingClientRect();
-      const scrollerRect = scroller.getBoundingClientRect();
-      const itemCenter = itemRect.left + itemRect.width / 2 - scrollerRect.left;
-      const distance = Math.abs(itemCenter - centerX);
-      const maxDistance = scrollerCenter;
-      const normalizedDistance = Math.min(distance / maxDistance, 1);
-      const opacity = 1 - normalizedDistance * 0.7;
-      const blur = normalizedDistance * 1.5;
-      item.style.opacity = Math.max(0.3, opacity);
-      item.style.filter = blur > 0.1 ? `blur(${blur}px)` : "none";
+      itemOffsets.push(item.offsetLeft);
+      itemWidths.push(item.offsetWidth);
     });
+    // True period of the repeating set, from real offsets (items vary in width).
+    if (itemOffsets.length > itemCount) {
+      setWidth = itemOffsets[itemCount] - itemOffsets[0];
+    }
+  }
+
+  // X translation that centers a specific physical item copy.
+  function targetXForCopy(copyIndex) {
+    return scrollerCenter - (itemOffsets[copyIndex] + itemWidths[copyIndex] / 2);
+  }
+
+  // Among every copy of a logical page index, the one closest to referenceX.
+  function nearestCopyForLogical(logicalIndex, referenceX) {
+    let best = -1;
+    let bestDist = Infinity;
+    for (let i = logicalIndex; i < items.length; i += itemCount) {
+      const dist = Math.abs(targetXForCopy(i) - referenceX);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = i;
+      }
+    }
+    return best;
+  }
+
+  function relayout() {
+    measure();
+    ensureEnoughSets();
+    measure();
+    cacheItemMetrics();
+  }
+
+  // Position-based, no per-frame getBoundingClientRect (avoids layout thrash).
+  function updateDepthEffect() {
+    if (!itemOffsets.length) return;
+    const maxDistance = scrollerCenter || 1;
+    for (let i = 0; i < items.length; i++) {
+      const center = currentX + itemOffsets[i] + itemWidths[i] / 2;
+      const normalizedDistance = Math.min(
+        Math.abs(center - scrollerCenter) / maxDistance,
+        1,
+      );
+      const blur = normalizedDistance * 1.5;
+      items[i].style.opacity = Math.max(0.3, 1 - normalizedDistance * 0.7);
+      items[i].style.filter = blur > 0.1 ? `blur(${blur}px)` : "none";
+    }
   }
 
   function wrapPosition() {
@@ -165,63 +228,74 @@ updateBannerOffset();
   }
 
   function snapToNearest() {
-    // From the formula: currentX = scrollerCenter - itemActualWidth/2 - index * itemWidth
-    // Solving for index: index = (scrollerCenter - itemActualWidth/2 - currentX) / itemWidth
-    const itemActualWidth = itemWidth - gap;
-    const rawIndex =
-      (scrollerCenter - itemActualWidth / 2 - currentX) / itemWidth;
-    const nearestIndex = Math.round(rawIndex);
-    targetX = scrollerCenter - itemActualWidth / 2 - nearestIndex * itemWidth;
+    if (!itemOffsets.length) return;
+    let best = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < items.length; i++) {
+      const center = currentX + itemOffsets[i] + itemWidths[i] / 2;
+      const dist = Math.abs(center - scrollerCenter);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = i;
+      }
+    }
+    targetX = targetXForCopy(best);
+    start();
   }
 
-  function animate() {
+  function start() {
+    if (running) return;
+    running = true;
+    requestAnimationFrame(frame);
+  }
+
+  function frame() {
     if (!initialized) {
-      calculateDimensions();
-      if (itemWidth > 0 && scrollerCenter > 0) {
-        // To center item N of the middle set (items 5-9):
-        // - Item N's left edge is at: (itemCount + currentPageIndex) * itemWidth = setWidth + currentPageIndex * itemWidth
-        // - We want item N's center at scrollerCenter
-        // - Item center = item left + (itemWidth - gap) / 2
-        // - So: setWidth + currentPageIndex * itemWidth + currentX + (itemWidth - gap) / 2 = scrollerCenter
-        // - Solving: currentX = scrollerCenter - (itemWidth - gap) / 2 - setWidth - currentPageIndex * itemWidth
-        const itemActualWidth = itemWidth - gap;
-        currentX =
-          scrollerCenter -
-          itemActualWidth / 2 -
-          setWidth -
-          currentPageIndex * itemWidth;
+      relayout();
+      if (itemOffsets.length && scrollerCenter > 0) {
+        const setsCount = Math.round(items.length / itemCount);
+        const copy = Math.floor(setsCount / 2) * itemCount + currentPageIndex;
+        currentX = targetXForCopy(copy);
         targetX = currentX;
         initialized = true;
+      } else {
+        requestAnimationFrame(frame);
+        return;
       }
     }
 
-    if (!isDragging && initialized) {
+    if (!isDragging) {
       currentX += (targetX - currentX) * 0.15;
       if (Math.abs(targetX - currentX) < 0.5) currentX = targetX;
     }
 
-    if (initialized) {
-      wrapPosition();
-      track.style.transform = `translateX(${currentX}px)`;
-      updateDepthEffect();
-    }
+    wrapPosition();
+    track.style.transform = `translateX(${currentX}px)`;
+    updateDepthEffect();
 
-    requestAnimationFrame(animate);
+    if (!isDragging && currentX === targetX) {
+      running = false;
+      return;
+    }
+    requestAnimationFrame(frame);
   }
 
   function onDragStart(e) {
     if (!initialized) return;
     isDragging = true;
+    hasDragged = false;
     track.classList.add("grabbing");
     startX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
     startScrollX = currentX;
     e.preventDefault();
+    start();
   }
 
   function onDragMove(e) {
     if (!isDragging) return;
     const x = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
     const delta = x - startX;
+    if (Math.abs(delta) > 5) hasDragged = true;
     currentX = startScrollX + delta;
     targetX = currentX;
   }
@@ -241,8 +315,7 @@ updateBannerOffset();
   }
 
   function onScroll() {
-    const scrollY = window.scrollY;
-    const shouldFix = scrollY > wrapperTop;
+    const shouldFix = window.scrollY > wrapperTop;
     if (shouldFix && !isFixed) {
       isFixed = true;
       wrapper.classList.add("is-fixed");
@@ -254,17 +327,34 @@ updateBannerOffset();
       isFixed = false;
       wrapper.classList.remove("is-fixed");
       if (placeholder) placeholder.classList.remove("active");
-      wrapper.style.backgroundColor = ""; // Clear inline style when unfixed
+      wrapper.style.backgroundColor = "";
     }
   }
 
+  // Only hijack the wheel for horizontal-intent gestures, so vertical
+  // page scrolling passes through; snap once the gesture settles.
   function onWheel(e) {
     if (!initialized) return;
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault();
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    targetX -= delta * 0.5;
-    snapToNearest();
+    targetX -= e.deltaX * 0.5;
+    start();
+    clearTimeout(wheelSnapTimer);
+    wheelSnapTimer = setTimeout(snapToNearest, 120);
   }
+
+  // Swallow the click that follows a drag so the link doesn't navigate.
+  track.addEventListener(
+    "click",
+    (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasDragged = false;
+      }
+    },
+    true,
+  );
 
   track.addEventListener("mousedown", onDragStart);
   track.addEventListener("touchstart", onDragStart, { passive: false });
@@ -275,22 +365,33 @@ updateBannerOffset();
   scroller.addEventListener("wheel", onWheel, { passive: false });
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", () => {
-    calculateDimensions();
+    if (initialized) relayout();
     updateFixedState();
+    start();
   });
 
-  updateFixedState();
-  requestAnimationFrame(animate);
-
-  // Scroll to center a specific page index
-  function scrollToPageIndex(pageIndex) {
-    if (!initialized || itemWidth <= 0) return;
-    const itemActualWidth = itemWidth - gap;
-    targetX =
-      scrollerCenter - itemActualWidth / 2 - setWidth - pageIndex * itemWidth;
+  // Re-measure once the custom serif font loads, otherwise items are sized
+  // with the fallback font and the active page sits off-center.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      if (!isDragging) {
+        initialized = false;
+        start();
+      }
+    });
   }
 
-  // Export function to update current page indicator (used by router)
+  updateFixedState();
+  start();
+
+  function scrollToPageIndex(pageIndex) {
+    if (!initialized || !itemOffsets.length) return;
+    const copy = nearestCopyForLogical(pageIndex, currentX);
+    if (copy < 0) return;
+    targetX = targetXForCopy(copy);
+    start();
+  }
+
   window.updateLensScrollerCurrent = function (url) {
     const filename = url.split("/").pop() || "index.html";
     let newCurrentIndex = 0;
@@ -302,7 +403,6 @@ updateBannerOffset();
         if (index < itemCount) newCurrentIndex = index;
       }
     });
-    // Center the carousel on the new current page
     scrollToPageIndex(newCurrentIndex);
   };
 })();
