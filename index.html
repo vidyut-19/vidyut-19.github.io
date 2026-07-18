@@ -26,6 +26,14 @@
         />
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
         <title>Vidyut Baradwaj</title>
+        <!-- PostHog analytics -->
+        <script>
+            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+            posthog.init("__POSTHOG_PROJECT_API_KEY__", {
+                api_host: "https://us.i.posthog.com",
+                person_profiles: "identified_only",
+            });
+        </script>
     </head>
     <body>
         <header id="banner">
@@ -74,27 +82,25 @@
 
         <main id="content">
             <p>
-                I'm researching embodied and video-based foundation models.
-                More on what I'm up to <a href="now.html">now</a>.
+                I work on robot learning and deployment engineering —
+                teaching robots new skills, then shipping them out of the
+                lab and into the real world. More on what I'm up to
+                <a href="now.html">now</a>.
             </p>
 
             <p>
                 I studied computational and applied math at UChicago, then
-                stuck around for a master's in computer science. The math
-                side was analysis, theoretical statistics, and optimization;
-                the CS side was Go concurrency, Haskell, and building things
-                on AWS with Spark, Hive, and Kafka.
+                stuck around for a master's in computer science — heavy on
+                optimization, statistics, and distributed systems.
             </p>
 
             <p>
-                I've worked at a couple startups — most recently at
-                Javelin, and before that at
+                I'm a founding engineer at
+                <a href="https://rellingsystems.com">Relling</a>; before
+                that I worked at Javelin and
                 <a href="https://trajektory.com/">Trajektory</a>.
-                Outside of work I danced competitive
-                <a href="https://www.youtube.com/watch?v=FhJwJ90ksXc"
-                    >Bhangra</a
-                >, started a Bollywood-Rock band called AC/Desi, and watched
-                a lot of HBO with my friends.
+                Outside of work you'll find me on a tennis court or out
+                on my bike.
             </p>
         </main>
 
