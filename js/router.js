@@ -99,8 +99,7 @@
       main.innerHTML = content.main;
     }
 
-    // NOTE: Footer is preserved during SPA navigation to keep the Spotify visualizer iframe alive
-    // The footer is identical across all pages, so no need to update it
+    // Footer is identical across all pages, so it's preserved during SPA navigation
 
     // Update URL without reload (skip on popstate — the browser already
     // moved the history pointer, pushing again would destroy forward entries)
