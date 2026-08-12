@@ -1,11 +1,4 @@
-// ============================================
-// Common JavaScript for Essay Pages
-// (No lens scroller - different layout)
-// ============================================
 
-// ============================================
-// Banner Animation
-// ============================================
 const updateBannerOffset = () => {
     const y = window.scrollY || window.pageYOffset;
     const x = Math.sin(y / 120) * 80;
@@ -15,9 +8,6 @@ const updateBannerOffset = () => {
 window.addEventListener('scroll', updateBannerOffset, { passive: true });
 updateBannerOffset();
 
-// ============================================
-// Theme Toggle
-// ============================================
 (function initTheme() {
     const themeToggle = document.getElementById('theme-toggle');
     if (!themeToggle) return;

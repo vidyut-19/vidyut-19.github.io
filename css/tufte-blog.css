@@ -8,9 +8,7 @@ body.tufte-post {
   padding-right: 0;
 }
 
-/* =====================================================
-   DROPCAPS
-   ===================================================== */
+/* Dropcaps */
 
 .tufte-article section > p:first-of-type::first-letter {
   font-size: 3.5em;
@@ -27,9 +25,7 @@ html.dark-theme .tufte-article section > p:first-of-type::first-letter {
   color: #e0e0e0;
 }
 
-/* =====================================================
-   LINK STYLING
-   ===================================================== */
+/* Link styling */
 
 .tufte-article a {
   text-decoration: underline;
@@ -120,9 +116,7 @@ html.dark-theme .article-header time {
   grid-column: 2 / 3;
 }
 
-/* =====================================================
-   SIDENOTES AND MARGIN NOTES
-   ===================================================== */
+/* Sidenotes and margin notes */
 
 /* Hide checkbox inputs */
 .sidenote-toggle-input,
@@ -208,9 +202,7 @@ html.dark-theme .margin-toggle {
   color: #66b3ff;
 }
 
-/* =====================================================
-   LEFT MARGIN FIGURES
-   ===================================================== */
+/* Left margin figures */
 
 .margin-figure-left {
   grid-column: 1 / 2;
@@ -274,9 +266,7 @@ html.dark-theme .margin-figure-right figcaption {
   color: #a0a0a0;
 }
 
-/* =====================================================
-   FULL-WIDTH ELEMENTS
-   ===================================================== */
+/* Full-width elements */
 
 .fullwidth {
   grid-column: 1 / -1;
@@ -301,9 +291,7 @@ html.dark-theme .fullwidth figcaption {
   color: #a0a0a0;
 }
 
-/* =====================================================
-   HEADER/FOOTER CONTAINMENT
-   ===================================================== */
+/* Header/footer containment */
 
 body.tufte-post #banner,
 body.tufte-post header:not(.article-header) {
@@ -321,9 +309,7 @@ body.tufte-post footer:not(.article-header) {
   padding-right: 1.5rem;
 }
 
-/* =====================================================
-   RESPONSIVE DESIGN
-   ===================================================== */
+/* Responsive design */
 
 /* Tablet: Narrower margins */
 @media (max-width: 1200px) {

@@ -16,7 +16,6 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 
-# Try to import optional dependencies
 try:
     import markdown
     HAS_MARKDOWN = True
@@ -29,7 +28,6 @@ try:
 except ImportError:
     HAS_YAML = False
 
-# Paths
 OBSIDIAN_BASE = Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain/Writing"
 PUBLISHED_DIR = OBSIDIAN_BASE / "Published"
 DRAFTS_DIR = OBSIDIAN_BASE / "Drafts"
@@ -38,13 +36,21 @@ OUTPUT_DIR = SCRIPT_DIR / "essay"
 TEMPLATE_PATH = SCRIPT_DIR / "templates" / "essay.html"
 INDEX_OUTPUT = SCRIPT_DIR / "essays.html"
 
+POSTHOG_HEAD = '''    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init("phc_qZbwVGM7GX6gBV2rt9nvS8SLQ23C4aADYJf94x3hdDsy", {
+            api_host: "https://us.i.posthog.com",
+            defaults: "2025-05-24",
+            person_profiles: "identified_only",
+        });
+    </script>'''
+
 
 def parse_frontmatter(content: str) -> tuple[dict, str]:
     """Parse YAML frontmatter from markdown content."""
     if not content.startswith('---'):
         return {}, content
 
-    # Find the closing ---
     end_match = re.search(r'\n---\s*\n', content[3:])
     if not end_match:
         return {}, content
@@ -58,7 +64,6 @@ def parse_frontmatter(content: str) -> tuple[dict, str]:
         except yaml.YAMLError:
             frontmatter = {}
     else:
-        # Simple fallback parser
         frontmatter = {}
         for line in frontmatter_str.strip().split('\n'):
             if ':' in line:
@@ -81,7 +86,6 @@ def process_acronyms(html: str) -> str:
     - Inside code blocks
     - Common words that shouldn't be smallcaps (I, A, etc.)
     """
-    # Words to exclude (single letters, common words)
     exclude = {'I', 'A', 'OK', 'US', 'UK', 'AM', 'PM', 'AD', 'BC', 'ID', 'OR', 'AN', 'IF', 'IT', 'AS', 'AT', 'BE', 'BY', 'DO', 'GO', 'HE', 'IN', 'IS', 'ME', 'MY', 'NO', 'OF', 'ON', 'SO', 'TO', 'UP', 'WE'}
 
     def replace_acronym(match):
@@ -90,21 +94,17 @@ def process_acronyms(html: str) -> str:
             return word
         return f'<span class="smallcaps">{word}</span>'
 
-    # Split by HTML tags to avoid processing inside tags
     parts = re.split(r'(<[^>]+>)', html)
     result = []
     in_code = False
 
     for part in parts:
-        # Track if we're inside a code block
         if part.startswith('<code'):
             in_code = True
         elif part.startswith('</code'):
             in_code = False
 
-        # Only process text outside of tags and code blocks
         if not part.startswith('<') and not in_code:
-            # Match 2-5 letter all-caps words with word boundaries
             part = re.sub(r'\b([A-Z]{2,5})\b', replace_acronym, part)
 
         result.append(part)
@@ -124,7 +124,6 @@ def process_sidenotes(html: str) -> str:
 <input type="checkbox" id="sn-{n}" class="sidenote-toggle-input">
 <span class="sidenote">{content}</span>'''
 
-    # Match {.sidenote}...{/.sidenote}
     html = re.sub(
         r'\{\.sidenote\}\s*(.*?)\s*\{/\.sidenote\}',
         replace_sidenote,
@@ -132,7 +131,6 @@ def process_sidenotes(html: str) -> str:
         flags=re.DOTALL
     )
 
-    # Also handle margin notes: {.marginnote}...{/.marginnote}
     margin_counter = [0]
 
     def replace_marginnote(match):
@@ -159,18 +157,12 @@ def convert_markdown(content: str) -> str:
         md = markdown.Markdown(extensions=['extra', 'smarty', 'sane_lists'])
         html = md.convert(content)
     else:
-        # Very basic fallback conversion
         html = content
-        # Paragraphs
         html = re.sub(r'\n\n+', '</p>\n\n<p>', html)
         html = f'<p>{html}</p>'
-        # Bold
         html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html)
-        # Italic
         html = re.sub(r'\*(.+?)\*', r'<em>\1</em>', html)
-        # Links
         html = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
-        # Headers
         html = re.sub(r'^### (.+)$', r'<h3>\1</h3>', html, flags=re.MULTILINE)
         html = re.sub(r'^## (.+)$', r'<h2>\1</h2>', html, flags=re.MULTILINE)
 
@@ -191,7 +183,6 @@ def format_date(date_str) -> tuple[str, str]:
     if isinstance(date_str, datetime):
         dt = date_str
     elif isinstance(date_str, str):
-        # Try parsing common formats
         for fmt in ['%Y-%m-%d', '%Y/%m/%d', '%d-%m-%Y', '%B %d, %Y']:
             try:
                 dt = datetime.strptime(date_str, fmt)
@@ -213,31 +204,24 @@ def build_essay(md_path: Path, is_draft: bool = False) -> dict:
     content = md_path.read_text(encoding='utf-8')
     frontmatter, body = parse_frontmatter(content)
 
-    # Extract metadata
     title = frontmatter.get('title', md_path.stem.replace('-', ' ').title())
     date_str = frontmatter.get('date', '')
     description = frontmatter.get('description', '')
 
-    # Clean title of [DRAFT] markers
     title = re.sub(r'\s*\[DRAFT\].*$', '', title, flags=re.IGNORECASE)
     title = re.sub(r'\s*\[EARLY DRAFT\].*$', '', title, flags=re.IGNORECASE)
 
 
     date_iso, date_formatted = format_date(date_str) if date_str else ('', '')
 
-    # Process inline code before markdown conversion
     body = process_inline_code(body)
 
-    # Convert markdown to HTML
     html_content = convert_markdown(body)
 
-    # Process sidenotes
     html_content = process_sidenotes(html_content)
 
-    # Auto-wrap acronyms in smallcaps
     html_content = process_acronyms(html_content)
 
-    # Load template
     template = TEMPLATE_PATH.read_text(encoding='utf-8')
 
     output = template
@@ -246,7 +230,6 @@ def build_essay(md_path: Path, is_draft: bool = False) -> dict:
     output = output.replace('{{formatted_date}}', date_formatted)
     output = output.replace('{{content}}', html_content)
 
-    # Handle optional description
     if description:
         output = re.sub(r'\{\{#description\}\}(.+?)\{\{/description\}\}',
                        lambda m: m.group(1).replace('{{description}}', description),
@@ -254,13 +237,11 @@ def build_essay(md_path: Path, is_draft: bool = False) -> dict:
     else:
         output = re.sub(r'\{\{#description\}\}.+?\{\{/description\}\}', '', output, flags=re.DOTALL)
 
-    # Generate output filename
     slug = slugify(title)
     if is_draft:
         slug = f"draft-{slug}"
     output_path = OUTPUT_DIR / f"{slug}.html"
 
-    # Write output
     OUTPUT_DIR.mkdir(exist_ok=True)
     output_path.write_text(output, encoding='utf-8')
 
@@ -281,9 +262,8 @@ def build_index(essays: list[dict]):
     print("  Building index: essays.html")
 
     # Sort by date (newest first), drafts at end
-    essays.sort(key=lambda e: (e['is_draft'], e.get('date_iso', '') or '0000'), reverse=True)
+    essays.sort(key=lambda e: (not e['is_draft'], e.get('date_iso', '') or '0000'), reverse=True)
 
-    # Build essay list HTML
     essay_items = []
     for essay in essays:
         draft_badge = ' <span style="color: #666; font-size: 0.8em;">[draft]</span>' if essay['is_draft'] else ''
@@ -297,7 +277,6 @@ def build_index(essays: list[dict]):
 
     essays_html = '\n'.join(essay_items)
 
-    # Index page template
     index_html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -311,6 +290,15 @@ def build_index(essays: list[dict]):
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <title>Essays - Vidyut Baradwaj</title>
+    <meta name="description" content="Long-form writing on technology, culture, and ideas by Vidyut Baradwaj.">
+    <link rel="canonical" href="https://vidyutbaradwaj.com/essays.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Essays - Vidyut Baradwaj">
+    <meta property="og:description" content="Long-form writing on technology, culture, and ideas by Vidyut Baradwaj.">
+    <meta property="og:url" content="https://vidyutbaradwaj.com/essays.html">
+    <meta property="og:image" content="https://vidyutbaradwaj.com/assets/images/profile.jpg">
+    <meta name="twitter:card" content="summary">
+{POSTHOG_HEAD}
 </head>
 <body>
     <header id="banner">
@@ -350,9 +338,9 @@ def build_index(essays: list[dict]):
         updateBannerOffset();
 
         const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
+        const root = document.documentElement;
         const renderIcon = () => {{
-            const isDark = document.body.classList.contains('dark-theme');
+            const isDark = root.classList.contains('dark-theme');
             themeToggle.innerHTML = isDark
                 ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>'
                 : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
@@ -360,13 +348,13 @@ def build_index(essays: list[dict]):
 
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {{
-            body.classList.add(savedTheme);
+            root.classList.add(savedTheme);
             renderIcon();
         }}
 
         themeToggle.addEventListener('click', () => {{
-            body.classList.toggle('dark-theme');
-            const isDark = body.classList.contains('dark-theme');
+            root.classList.toggle('dark-theme');
+            const isDark = root.classList.contains('dark-theme');
             localStorage.setItem('theme', isDark ? 'dark-theme' : '');
             renderIcon();
         }});
@@ -398,7 +386,6 @@ def main():
 
     essays = []
 
-    # Build published essays
     if PUBLISHED_DIR.exists():
         for md_file in PUBLISHED_DIR.glob('*.md'):
             try:
@@ -409,7 +396,6 @@ def main():
     else:
         print(f"  Warning: Published directory not found: {PUBLISHED_DIR}")
 
-    # Build drafts if requested
     if args.drafts and DRAFTS_DIR.exists():
         print("  Including drafts...")
         for md_file in DRAFTS_DIR.glob('*.md'):
@@ -419,7 +405,6 @@ def main():
             except Exception as e:
                 print(f"    Error building {md_file.name}: {e}")
 
-    # Build index
     build_index(essays)
 
     print(f"\nDone! Built {len(essays)} essay(s).")

@@ -1,13 +1,6 @@
-// ============================================
-// Common JavaScript - Shared across all pages
-// ============================================
 
-// ============================================
-// Banner Animation
-// ============================================
 const updateBannerOffset = () => {
   const y = window.scrollY || window.pageYOffset;
-  // Continuous scroll - moves left as you scroll down
   const x = -(y * 0.5);
   document.body.style.setProperty("--vb-banner-offset", (y % 120) + "px");
   document.body.style.setProperty("--vb-banner-x-offset", x + "px");
@@ -15,9 +8,6 @@ const updateBannerOffset = () => {
 window.addEventListener("scroll", updateBannerOffset, { passive: true });
 updateBannerOffset();
 
-// ============================================
-// Plane Runway Animation
-// ============================================
 (function initPlaneAnimation() {
   const plane = document.getElementById("plane");
   if (!plane) return;
@@ -29,12 +19,10 @@ updateBannerOffset();
     const scrollPercent = docHeight > 0 ? scrollY / docHeight : 0;
     const viewportWidth = window.innerWidth;
     const planeWidth = plane.offsetWidth || 200;
-    // Move from right to left as user scrolls down
     const planeX = viewportWidth - scrollPercent * (viewportWidth + planeWidth);
     plane.style.transform = `translateX(${planeX}px)`;
   };
 
-  // Wait for image to load before first position update
   if (plane.complete) {
     updatePlanePosition();
   } else {
@@ -45,9 +33,6 @@ updateBannerOffset();
   window.addEventListener("resize", updatePlanePosition, { passive: true });
 })();
 
-// ============================================
-// Theme Toggle
-// ============================================
 (function initTheme() {
   const themeToggle = document.getElementById("theme-toggle");
   if (!themeToggle) return;
@@ -69,7 +54,6 @@ updateBannerOffset();
     const isDark = root.classList.contains("dark-theme");
     localStorage.setItem("theme", isDark ? "dark-theme" : "");
     renderIcon();
-    // Update fixed menu background when theme changes
     const wrapper = document.getElementById("lens-scroller-wrapper");
     if (wrapper && wrapper.classList.contains("is-fixed")) {
       wrapper.style.backgroundColor = getComputedStyle(
@@ -79,9 +63,6 @@ updateBannerOffset();
   });
 })();
 
-// ============================================
-// Lens Scroller
-// ============================================
 (function initLensScroller() {
   const wrapper = document.getElementById("lens-scroller-wrapper");
   const scroller = document.getElementById("lens-scroller");
@@ -102,7 +83,6 @@ updateBannerOffset();
     now: ["now.html", "now"],
   };
 
-  // Check if path matches any of the page patterns
   function pathMatchesPage(path, patterns) {
     return patterns.some((pattern) => path.includes(pattern));
   }
