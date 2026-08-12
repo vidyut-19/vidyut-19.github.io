@@ -76,7 +76,7 @@
     };
   }
 
-  function updateDOM(content, url) {
+  function updateDOM(content, url, push) {
     // Update title
     document.title = content.title;
 
@@ -102,8 +102,9 @@
     // NOTE: Footer is preserved during SPA navigation to keep the Spotify visualizer iframe alive
     // The footer is identical across all pages, so no need to update it
 
-    // Update URL without reload
-    history.pushState({ url }, "", url);
+    // Update URL without reload (skip on popstate — the browser already
+    // moved the history pointer, pushing again would destroy forward entries)
+    if (push) history.pushState({ url }, "", url);
 
     // Scroll to top
     window.scrollTo(0, 0);
@@ -118,7 +119,7 @@
   // Navigation
   // ============================================
 
-  async function navigate(url) {
+  async function navigate(url, push = true) {
     // Normalize URL
     const normalizedUrl = new URL(url, location.href).href;
 
@@ -142,10 +143,10 @@
     // Use View Transitions API if available
     if (document.startViewTransition) {
       document.startViewTransition(() => {
-        updateDOM(content, normalizedUrl);
+        updateDOM(content, normalizedUrl, push);
       });
     } else {
-      updateDOM(content, normalizedUrl);
+      updateDOM(content, normalizedUrl, push);
     }
   }
 
@@ -193,12 +194,7 @@
 
   // Handle browser back/forward
   window.addEventListener("popstate", (e) => {
-    if (e.state?.url) {
-      navigate(e.state.url);
-    } else {
-      // Fallback: reload the page
-      navigate(location.href);
-    }
+    navigate(e.state?.url || location.href, false);
   });
 
   // Prefetch on link hover

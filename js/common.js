@@ -52,10 +52,10 @@ updateBannerOffset();
   const themeToggle = document.getElementById("theme-toggle");
   if (!themeToggle) return;
 
-  const body = document.body;
+  const root = document.documentElement;
 
   const renderIcon = () => {
-    const isDark = body.classList.contains("dark-theme");
+    const isDark = root.classList.contains("dark-theme");
     themeToggle.innerHTML = isDark
       ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="19" rx="5" ry="2"/><path d="M7 19v-3c0-1 1-2 2-3l1-2h4l1 2c1 1 2 2 2 3v3"/><path d="M10 11V7c0-1 1-2 2-2s2 1 2 2v4"/><path d="M12 5c0-1.5-1-3-1-3s2 0 2 2"/></svg>'
       : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="10" width="6" height="11" rx="1"/><path d="M10 10V9a2 2 0 1 1 4 0v1"/><ellipse cx="12" cy="6" rx="2" ry="3"/><path d="M12 3c0-1 .5-2 .5-2s.5 1 .5 2"/></svg>';
@@ -65,9 +65,8 @@ updateBannerOffset();
   renderIcon();
 
   themeToggle.addEventListener("click", () => {
-    body.classList.toggle("dark-theme");
-    document.documentElement.classList.toggle("dark-theme");
-    const isDark = body.classList.contains("dark-theme");
+    root.classList.toggle("dark-theme");
+    const isDark = root.classList.contains("dark-theme");
     localStorage.setItem("theme", isDark ? "dark-theme" : "");
     renderIcon();
     // Update fixed menu background when theme changes
@@ -285,7 +284,7 @@ updateBannerOffset();
     isDragging = true;
     hasDragged = false;
     track.classList.add("grabbing");
-    startX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+    startX = e.clientX;
     startScrollX = currentX;
     e.preventDefault();
     start();
@@ -293,14 +292,55 @@ updateBannerOffset();
 
   function onDragMove(e) {
     if (!isDragging) return;
-    const x = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
-    const delta = x - startX;
+    const delta = e.clientX - startX;
     if (Math.abs(delta) > 5) hasDragged = true;
     currentX = startScrollX + delta;
     targetX = currentX;
   }
 
   function onDragEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove("grabbing");
+    snapToNearest();
+  }
+
+  // Touch handling is axis-locked: taps and vertical scrolls pass through
+  // untouched (preventDefault on touchstart would suppress the synthesized
+  // click and kill nav taps on mobile); only a horizontal-intent gesture
+  // becomes a drag.
+  let touchAxis = null;
+  let touchStartY = 0;
+
+  function onTouchStart(e) {
+    if (!initialized) return;
+    touchAxis = null;
+    hasDragged = false;
+    startX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    startScrollX = currentX;
+  }
+
+  function onTouchMove(e) {
+    if (touchAxis === "y") return;
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - touchStartY;
+    if (touchAxis === null) {
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      touchAxis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+      if (touchAxis === "y") return;
+      isDragging = true;
+      hasDragged = true;
+      track.classList.add("grabbing");
+      start();
+    }
+    e.preventDefault();
+    currentX = startScrollX + dx;
+    targetX = currentX;
+  }
+
+  function onTouchEnd() {
+    touchAxis = null;
     if (!isDragging) return;
     isDragging = false;
     track.classList.remove("grabbing");
@@ -357,11 +397,12 @@ updateBannerOffset();
   );
 
   track.addEventListener("mousedown", onDragStart);
-  track.addEventListener("touchstart", onDragStart, { passive: false });
+  track.addEventListener("touchstart", onTouchStart, { passive: true });
   window.addEventListener("mousemove", onDragMove);
-  window.addEventListener("touchmove", onDragMove, { passive: true });
+  track.addEventListener("touchmove", onTouchMove, { passive: false });
   window.addEventListener("mouseup", onDragEnd);
-  window.addEventListener("touchend", onDragEnd);
+  window.addEventListener("touchend", onTouchEnd);
+  window.addEventListener("touchcancel", onTouchEnd);
   scroller.addEventListener("wheel", onWheel, { passive: false });
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", () => {

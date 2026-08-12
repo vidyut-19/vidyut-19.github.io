@@ -249,7 +249,7 @@ def build_essay(md_path: Path, is_draft: bool = False) -> dict:
     # Handle optional description
     if description:
         output = re.sub(r'\{\{#description\}\}(.+?)\{\{/description\}\}',
-                       rf'\1'.replace('{{description}}', description),
+                       lambda m: m.group(1).replace('{{description}}', description),
                        output, flags=re.DOTALL)
     else:
         output = re.sub(r'\{\{#description\}\}.+?\{\{/description\}\}', '', output, flags=re.DOTALL)

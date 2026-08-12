@@ -23,7 +23,7 @@ body.tufte-post {
   color: #111;
 }
 
-body.dark-theme .tufte-article section > p:first-of-type::first-letter {
+html.dark-theme .tufte-article section > p:first-of-type::first-letter {
   color: #e0e0e0;
 }
 
@@ -43,11 +43,11 @@ body.dark-theme .tufte-article section > p:first-of-type::first-letter {
   text-decoration-color: currentColor;
 }
 
-body.dark-theme .tufte-article a {
+html.dark-theme .tufte-article a {
   text-decoration-color: rgba(255, 255, 255, 0.3);
 }
 
-body.dark-theme .tufte-article a:hover {
+html.dark-theme .tufte-article a:hover {
   text-decoration-color: currentColor;
 }
 
@@ -60,7 +60,7 @@ body.dark-theme .tufte-article a:hover {
   border-radius: 3px;
 }
 
-body.dark-theme .tufte-article code {
+html.dark-theme .tufte-article code {
   background: rgba(255, 255, 255, 0.08);
 }
 
@@ -97,8 +97,8 @@ body.dark-theme .tufte-article code {
   color: #6b7280;
 }
 
-body.dark-theme .article-header .subtitle,
-body.dark-theme .article-header time {
+html.dark-theme .article-header .subtitle,
+html.dark-theme .article-header time {
   color: #9ca3af;
 }
 
@@ -144,7 +144,7 @@ body.dark-theme .article-header time {
   cursor: pointer;
 }
 
-body.dark-theme .sidenote-number::after {
+html.dark-theme .sidenote-number::after {
   color: #66b3ff;
 }
 
@@ -170,11 +170,11 @@ body.dark-theme .sidenote-number::after {
   color: #0366D6;
 }
 
-body.dark-theme .sidenote {
+html.dark-theme .sidenote {
   color: #a0a0a0;
 }
 
-body.dark-theme .sidenote::before {
+html.dark-theme .sidenote::before {
   color: #66b3ff;
 }
 
@@ -193,7 +193,7 @@ body.dark-theme .sidenote::before {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
-body.dark-theme .marginnote {
+html.dark-theme .marginnote {
   color: #a0a0a0;
 }
 
@@ -204,7 +204,7 @@ body.dark-theme .marginnote {
   font-size: 0.8em;
 }
 
-body.dark-theme .margin-toggle {
+html.dark-theme .margin-toggle {
   color: #66b3ff;
 }
 
@@ -239,7 +239,7 @@ body.dark-theme .margin-toggle {
   text-align: right;
 }
 
-body.dark-theme .margin-figure-left figcaption {
+html.dark-theme .margin-figure-left figcaption {
   color: #a0a0a0;
 }
 
@@ -270,7 +270,7 @@ body.dark-theme .margin-figure-left figcaption {
   text-align: left;
 }
 
-body.dark-theme .margin-figure-right figcaption {
+html.dark-theme .margin-figure-right figcaption {
   color: #a0a0a0;
 }
 
@@ -297,7 +297,7 @@ body.dark-theme .margin-figure-right figcaption {
   color: #555;
 }
 
-body.dark-theme .fullwidth figcaption {
+html.dark-theme .fullwidth figcaption {
   color: #a0a0a0;
 }
 
@@ -360,8 +360,8 @@ body.tufte-post footer:not(.article-header) {
     font-style: normal;
   }
 
-  body.dark-theme .sidenote,
-  body.dark-theme .marginnote {
+  html.dark-theme .sidenote,
+  html.dark-theme .marginnote {
     background: rgba(255, 255, 255, 0.05);
     border-left-color: #66b3ff;
   }
