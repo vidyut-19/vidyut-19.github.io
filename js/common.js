@@ -259,21 +259,36 @@ updateBannerOffset();
     requestAnimationFrame(frame);
   }
 
+  // Hold the track still until the pointer clears the threshold. Moving it on
+  // the first pixel slid links out from under the cursor, and any twitch during
+  // a click set hasDragged, which the capture-phase handler below turns into a
+  // swallowed navigation.
+  const DRAG_THRESHOLD = 8;
+
+  // Under 640px the CSS lays the items out as a static wrapped row, so there is
+  // nothing to drag. Touch devices also synthesize mouse events, so both input
+  // paths have to bail or a drifting tap latches hasDragged and loses the nav.
+  const staticNav = window.matchMedia("(max-width: 640px)");
+
   function onDragStart(e) {
     if (!initialized) return;
+    // Suppress the browser's native link drag — it otherwise swallows the click
+    // whenever the pointer drifts. Below 640px that is all this needs to do.
+    e.preventDefault();
+    if (staticNav.matches) return;
     isDragging = true;
     hasDragged = false;
     track.classList.add("grabbing");
     startX = e.clientX;
     startScrollX = currentX;
-    e.preventDefault();
     start();
   }
 
   function onDragMove(e) {
     if (!isDragging) return;
     const delta = e.clientX - startX;
-    if (Math.abs(delta) > 5) hasDragged = true;
+    if (!hasDragged && Math.abs(delta) < DRAG_THRESHOLD) return;
+    hasDragged = true;
     currentX = startScrollX + delta;
     targetX = currentX;
   }
@@ -293,7 +308,7 @@ updateBannerOffset();
   let touchStartY = 0;
 
   function onTouchStart(e) {
-    if (!initialized) return;
+    if (!initialized || staticNav.matches) return;
     touchAxis = null;
     hasDragged = false;
     startX = e.touches[0].clientX;
@@ -302,7 +317,7 @@ updateBannerOffset();
   }
 
   function onTouchMove(e) {
-    if (touchAxis === "y") return;
+    if (touchAxis === "y" || staticNav.matches) return;
     const dx = e.touches[0].clientX - startX;
     const dy = e.touches[0].clientY - touchStartY;
     if (touchAxis === null) {

@@ -341,6 +341,34 @@ html.dark-theme body::after {
         margin-top: 1.25rem;
         margin-bottom: 0.5rem;
     }
+
+    .header-container {
+        margin-bottom: 14px;
+    }
+
+    .header-left {
+        gap: 0.75rem;
+        min-width: 0;
+    }
+
+    .header-left h1 {
+        font-size: 1.5rem;
+    }
+
+    .profile-pic {
+        width: 64px;
+        height: 64px;
+        flex-shrink: 0;
+    }
+
+    .slash-title {
+        display: block;
+    }
+
+    /* 120px of fixed decoration over a ~650px viewport is most of a screenful. */
+    .plane-runway {
+        display: none;
+    }
 }
 
 /* Lens Scroller Navigation */
@@ -430,8 +458,11 @@ html.dark-theme body::after {
     padding: 0.5rem 0;
 }
 
+/* Wins over the per-frame inline opacity/filter written by updateDepthEffect. */
 .lens-item:hover {
     text-decoration: none;
+    opacity: 1 !important;
+    filter: none !important;
 }
 
 .lens-item.current {
@@ -442,17 +473,46 @@ html.dark-theme .lens-scroller-wrapper.is-fixed {
     background-color: #1a1a1a;
 }
 
+/* Below 640px the lens becomes a static wrapped row: a drag-to-reveal scroller
+   costs a gesture to discover five links, and the !important overrides here
+   neutralize the transform and per-frame depth styles the script still writes. */
 @media (max-width: 640px) {
+    .lens-scroller-wrapper.is-fixed {
+        position: static;
+        padding: 0;
+    }
+
+    .lens-scroller-placeholder.active {
+        display: none;
+    }
+
+    .lens-scroller,
     .lens-scroller-wrapper.is-fixed .lens-scroller {
-        padding: 0 1rem;
+        overflow: visible;
+        height: auto;
+        padding: 0;
+        mask-image: none;
+        -webkit-mask-image: none;
     }
 
     .lens-scroller-track {
-        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: auto;
+        gap: 0.25rem 2.5rem;
+        cursor: default;
+        transform: none !important;
     }
 
     .lens-item {
-        font-size: 0.65rem;
+        font-size: 0.8rem;
+        padding: 0.6rem 0.5rem;
+        opacity: 1 !important;
+        filter: none !important;
+    }
+
+    .lens-item:nth-child(n + 6) {
+        display: none;
     }
 }
 
