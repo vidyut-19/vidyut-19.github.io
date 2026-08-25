@@ -1,0 +1,34 @@
+templates/essay.html
+  s_d4a9927cd4a751::t_4c4d7acf8b0eac 19-26
+index.html
+  s_d4a9927cd4a751::t_6266daf3d9a434 32
+projects.html
+  s_d4a9927cd4a751::t_6266daf3d9a434 32
+essays.html
+  s_d4a9927cd4a751::t_6266daf3d9a434 32
+now.html
+  s_d4a9927cd4a751::t_6266daf3d9a434 32
+build.py
+  s_d4a9927cd4a751::t_8f43c0ed3fee6d 227-230,233
+  s_d4a9927cd4a751::t_fc86877d81f527 298
+hobbies.html
+  s_d4a9927cd4a751::t_6266daf3d9a434 32
+contact.html
+  s_d4a9927cd4a751::t_6266daf3d9a434 32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "454907b80bc4f419764a61f97b9cf21beddda450",
+  "prompts": {},
+  "sessions": {
+    "s_d4a9927cd4a751": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c6326d8-e3ab-46df-b211-d686c0951c23",
+        "model": "claude-opus-5"
+      },
+      "human_author": "vidyut-19 <vidyut@rellingsystems.com>"
+    }
+  }
+}
