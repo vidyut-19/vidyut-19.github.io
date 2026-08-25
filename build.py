@@ -224,8 +224,13 @@ def build_essay(md_path: Path, is_draft: bool = False) -> dict:
 
     template = TEMPLATE_PATH.read_text(encoding='utf-8')
 
+    slug = slugify(title)
+    if is_draft:
+        slug = f"draft-{slug}"
+
     output = template
     output = output.replace('{{title}}', title)
+    output = output.replace('{{url}}', f"https://vidyutbaradwaj.com/essay/{slug}.html")
     output = output.replace('{{date}}', date_iso)
     output = output.replace('{{formatted_date}}', date_formatted)
     output = output.replace('{{content}}', html_content)
@@ -237,9 +242,6 @@ def build_essay(md_path: Path, is_draft: bool = False) -> dict:
     else:
         output = re.sub(r'\{\{#description\}\}.+?\{\{/description\}\}', '', output, flags=re.DOTALL)
 
-    slug = slugify(title)
-    if is_draft:
-        slug = f"draft-{slug}"
     output_path = OUTPUT_DIR / f"{slug}.html"
 
     OUTPUT_DIR.mkdir(exist_ok=True)
@@ -293,6 +295,7 @@ def build_index(essays: list[dict]):
     <meta name="description" content="Long-form writing on technology, culture, and ideas by Vidyut Baradwaj.">
     <link rel="canonical" href="https://vidyutbaradwaj.com/essays.html">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vidyut Baradwaj">
     <meta property="og:title" content="Essays - Vidyut Baradwaj">
     <meta property="og:description" content="Long-form writing on technology, culture, and ideas by Vidyut Baradwaj.">
     <meta property="og:url" content="https://vidyutbaradwaj.com/essays.html">
