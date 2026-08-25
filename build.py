@@ -408,6 +408,10 @@ def main():
             except Exception as e:
                 print(f"    Error building {md_file.name}: {e}")
 
+    if not essays:
+        print("\nNo essays built — skipping essays.html regeneration to avoid wiping the existing index.")
+        return
+
     build_index(essays)
 
     print(f"\nDone! Built {len(essays)} essay(s).")
