@@ -1,0 +1,28 @@
+js/common.js
+  s_d4a9927cd4a751::t_0ff28fa78a2015 290-291
+  s_d4a9927cd4a751::t_7eac9da5e41883 262-272
+  s_d4a9927cd4a751::t_38807b2f465075 275-278
+  s_d4a9927cd4a751::t_784e88197af279 311
+  s_d4a9927cd4a751::t_7c56e700565ef2 320
+css/styles.css
+  s_d4a9927cd4a751::t_cbbb992c5a8d77 476-478,480-489,491-495,499-501,503-504,508-515
+  s_d4a9927cd4a751::t_d171065096ec9c 461,464-465
+  s_d4a9927cd4a751::t_836997ebd3de7b 502
+  s_d4a9927cd4a751::t_cecd9bd791a250 344-371
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "66fc5df0312340d961c204fe9bc6efff1d7b9992",
+  "prompts": {},
+  "sessions": {
+    "s_d4a9927cd4a751": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c6326d8-e3ab-46df-b211-d686c0951c23",
+        "model": "claude-opus-5"
+      },
+      "human_author": "vidyut-19 <vidyut@rellingsystems.com>"
+    }
+  }
+}
