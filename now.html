@@ -96,17 +96,47 @@
             <h3>Currently</h3>
             <ul>
                 <li>
-                    Standing up a bimanual UR5e work cell — control plane,
-                    calibration, and a teleop data engine
-                </li>
-                <li>
                     Fine-tuning an open-weights VLA on data from our own
                     cell and evaluating it against a scripted baseline
                 </li>
                 <li>
-                    Working through the manipulation canon — ACT, Diffusion
-                    Policy, π0, OpenVLA
+                    Temporal-grounding evals for VLAs — found
+                    duration-blindness across π0.5, π0-FAST, GR00T N1.x,
+                    MemoryVLA (~255 episodes); small conditioning fix worth
+                    +6pp zero-shot. Writeup in progress.
                 </li>
+            </ul>
+
+            <h3>Some things I've worked on</h3>
+            <ul>
+                <li>
+                    Bimanual UR5e work cell, end to end — Go control plane
+                    owning robot drivers, camera health, and cell telemetry
+                </li>
+                <li>
+                    Calibration stack — hand-eye extrinsics, per-dock
+                    re-registration, calibration-drift monitoring
+                </li>
+                <li>
+                    Teleop data engine — GELLO-style rig, MCAP recording,
+                    automated quality gates, LeRobot-format export
+                </li>
+                <li>
+                    Multi-GPU VLA fine-tuning on cell-collected data
+                    (π0.5), including spot-interruption handling and eval
+                    harnesses
+                </li>
+                <li>
+                    HIL-SERL-style intervention gating — space-mouse
+                    takeover logic during policy rollouts
+                </li>
+                <li>
+                    Integrated a vendor WebRTC teleop stack (Sentinel) and
+                    wrote the 125 Hz chunk-consumer interpolation layer on
+                    top
+                </li>
+                <li>Distillery — egocentric-video annotation pipeline at cloud scale</li>
+                <li>Javelin — pgvector semantic search, Go+SQS data pipelines, structured-output SSE streaming</li>
             </ul>
         </main>
 
